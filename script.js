@@ -33,13 +33,21 @@ tapLogo.addEventListener('click', () => {
   }, 500); // wait for 500ms (same duration as the animation)
 });
 
-Telegram.WebApp.init({
-  // Your bot token
-  botToken: '7507093707:AAH2WtcKPHJ_o-7UjwurMnwL96gs7BKTXFU',
-  // Function to call when the API is initialized
-  onReady: () => {
-    // Get the chat ID
+  // Initialize the Telegram Web App API
+  Telegram.WebApp.init({
+    botToken: '7507093707:AAH2WtcKPHJ_o-7UjwurMnwL96gs7BKTXFU',
+    // Other initialization options...
+  });
+
+  // Get the chat ID
+  Telegram.WebApp.onReady().then(() => {
     const chatId = Telegram.WebApp.getChatId();
-    console.log(`Chat ID: ${chatId}`);
-  }
-});
+    console.log('Chat ID:', chatId);
+
+    // Copy the chat ID to the clipboard
+    navigator.clipboard.writeText(chatId).then(() => {
+      console.log('Chat ID copied to clipboard!');
+    }).catch((error) => {
+      console.error('Error copying chat ID:', error);
+    });
+  });
