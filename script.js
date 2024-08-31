@@ -18,7 +18,7 @@ const tapLogoText = document.querySelector('#tap-logo-text');
 let coin = 0; // initialize coin to 0
 
 setInterval(() => {
-  coin += 1000000;
+  coin += 10;
   const formattedCoin = coin.toLocaleString(); // add thousands separator
   tapLogoText.textContent = `$${formattedCoin}`; // update text content
 }, 1000); // update every 1 second
