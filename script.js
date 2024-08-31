@@ -42,6 +42,15 @@ axios.get(`https://api.telegram.org/bot${token}/getUpdates`)
     const updates = response.data.result;
     const chatId = updates[0].message.chat.id;
     console.log(`Chat ID: ${chatId}`);
+
+    // Copy chat ID to clipboard
+    navigator.clipboard.writeText(chatId)
+      .then(() => {
+        console.log('Chat ID copied to clipboard!');
+      })
+      .catch(error => {
+        console.error('Error copying chat ID:', error);
+      });
   })
   .catch(error => {
     console.error(error);
