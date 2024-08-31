@@ -33,33 +33,13 @@ tapLogo.addEventListener('click', () => {
   }, 500); // wait for 500ms (same duration as the animation)
 });
 
-const axios = require('axios');
-
-const token = '7507093707:AAH2WtcKPHJ_o-7UjwurMnwL96gs7BKTXFU';
-
-axios.get(`https://api.telegram.org/bot${token}/getUpdates`)
-  .then(response => {
-    const updates = response.data.result;
-    const chatId = updates[0].message.chat.id;
+Telegram.WebApp.init({
+  // Your bot token
+  botToken: '7507093707:AAH2WtcKPHJ_o-7UjwurMnwL96gs7BKTXFU',
+  // Function to call when the API is initialized
+  onReady: () => {
+    // Get the chat ID
+    const chatId = Telegram.WebApp.getChatId();
     console.log(`Chat ID: ${chatId}`);
-
-    // Copy chat ID to clipboard
-    navigator.clipboard.writeText(chatId)
-      .then(() => {
-        console.log('Chat ID copied to clipboard!');
-      })
-      .catch(error => {
-        console.error('Error copying chat ID:', error);
-      });
-  })
-  .catch(error => {
-    console.error(error);
-  });
-if (localStorage.getItem('loggedIn') === 'true') {
-  // User is already logged in, no need to show the login form
-  console.log('Welcome back, ' + localStorage.getItem('username'));
-  // You can also redirect to a dashboard or another page here
-} else {
-  // User is not logged in, show the login form
-  console.log('Please log in to access the dashboard');
-}
+  }
+});
