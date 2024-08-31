@@ -33,6 +33,19 @@ tapLogo.addEventListener('click', () => {
   }, 500); // wait for 500ms (same duration as the animation)
 });
 
+const axios = require('axios');
+
+const token = '7507093707:AAH2WtcKPHJ_o-7UjwurMnwL96gs7BKTXFU';
+
+axios.get(`https://api.telegram.org/bot${token}/getUpdates`)
+  .then(response => {
+    const updates = response.data.result;
+    const chatId = updates[0].message.chat.id;
+    console.log(`Chat ID: ${chatId}`);
+  })
+  .catch(error => {
+    console.error(error);
+  });
 if (localStorage.getItem('loggedIn') === 'true') {
   // User is already logged in, no need to show the login form
   console.log('Welcome back, ' + localStorage.getItem('username'));
