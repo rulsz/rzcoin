@@ -1,6 +1,6 @@
 body {
   background-size: 100% 100%; /* Membuat background menjadi penuh */
-  background-color: pink;
+  background-image: url("img/sakura_background.png"); /* Update background image here */
   background-repeat: no-repeat;
   background-position: center;
   height: 100vh; /* Membuat tinggi body menjadi penuh */
