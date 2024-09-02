@@ -1,0 +1,17 @@
+body {
+  background-image: url('sakura_background.png'); /* Ganti dengan nama file background kamu */
+  background-size: 100% 100%; /* Membuat background menjadi penuh */
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 100vh; /* Membuat tinggi body menjadi penuh */
+  margin: 0; /* Menghilangkan margin body */
+}
+
+html, body {
+  overflow: hidden; /* Menghilangkan scroll pada halaman */
+  height: 100%; /* Membuat tinggi html dan body menjadi penuh */
+}
+
+#canvas {
+  border: 1px solid #000;
+}
