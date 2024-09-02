@@ -147,10 +147,10 @@ for (let i = 0; i < es.length; i++) {
     es[i].y = Math.random() * -canvas.height;
     es[i].x = Math.random() * (canvas.width - gambarSize);
     isFrozen = true; // Membekukan semua gambar
-    document.body.style.backgroundImage = 'url(sakura_background.png)';
+    document.body.style.backgroundImage = 'url(img/sakura_background.png)';
     setTimeout(function() {
       isFrozen = false; // Membatalkan pembekuan setelah 3 detik
-      document.body.style.backgroundImage = 'url(sakura_background.png)';
+      document.body.style.backgroundImage = 'url(img/sakura_background.png)';
     }, 3000);
   }
 }
