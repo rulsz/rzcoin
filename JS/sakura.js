@@ -1,4 +1,4 @@
-document.body.style.backgroundImage = 'url(img/sakura_background.png)';
+document.body.style.backgroundImage = 'url(sakura_background.png)';
 // Mendapatkan elemen canvas
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
@@ -49,11 +49,11 @@ let intervalWaktu;
 
 // Membuat gambar
 const gambarImage = new Image();
-gambarImage.src = 'img/sakura.png'; // Ganti dengan nama file gambar kamu
+gambarImage.src = 'sakura.png'; // Ganti dengan nama file gambar kamu
 const boomImage = new Image();
-boomImage.src = 'img/branch.png'; // Ganti dengan nama file gambar boom kamu
+boomImage.src = 'branch.png'; // Ganti dengan nama file gambar boom kamu
 const esImage = new Image();
-esImage.src = 'img/es.png'; // Ganti dengan nama file gambar boom kamu
+esImage.src = 'es.png'; // Ganti dengan nama file gambar boom kamu
 
 
 // Fungsi untuk menggambar gambar
@@ -87,7 +87,7 @@ function updateGambar() {
   if (!isFrozen) {
   for (let i = 0; i < gambar.length; i++) {
     gambar[i].y += gambar[i].speed;
-    gambar[i].angle += 5; // update nilai angle
+    gambar[i].angle += 2; // update nilai angle
     if (gambar[i].y > canvas.height) {
       gambar[i].y = Math.random() * -canvas.height;
       gambar[i].x = Math.random() * (canvas.width - gambarSize);
@@ -96,7 +96,7 @@ function updateGambar() {
   }
   for (let i = 0; i < boom.length; i++) {
   boom[i].y += boom[i].speed;
-  boom[i].angle += 5; // update nilai angle
+  boom[i].angle += 1; // update nilai angle
   if (boom[i].y > canvas.height) {
     boom[i].y = Math.random() * -canvas.height;
     boom[i].x = Math.random() * (canvas.width - gambarSize);
@@ -105,7 +105,7 @@ function updateGambar() {
 }
 for (let i = 0; i < es.length; i++) {
   es[i].y += es[i].speed;
-  es[i].angle += 5; // update nilai angle
+  es[i].angle += 3; // update nilai angle
   if (es[i].y > canvas.height) {
     es[i].y = Math.random() * -canvas.height;
     es[i].x = Math.random() * (canvas.width - gambarSize);
@@ -147,10 +147,10 @@ for (let i = 0; i < es.length; i++) {
     es[i].y = Math.random() * -canvas.height;
     es[i].x = Math.random() * (canvas.width - gambarSize);
     isFrozen = true; // Membekukan semua gambar
-    document.body.style.backgroundImage = 'url(img/sakura_background.png)';
+    document.body.style.backgroundImage = 'url(sakura_background.png)';
     setTimeout(function() {
       isFrozen = false; // Membatalkan pembekuan setelah 3 detik
-      document.body.style.backgroundImage = 'url(img/sakura_background.png)';
+      document.body.style.backgroundImage = 'url(sakura_background.png)';
     }, 3000);
   }
 }
