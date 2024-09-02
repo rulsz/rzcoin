@@ -48,11 +48,11 @@ let intervalWaktu;
 
 // Membuat gambar
 const gambarImage = new Image();
-gambarImage.src = 'sakura.png'; // Ganti dengan nama file gambar kamu
+gambarImage.src = 'img/sakura.png'; // Ganti dengan nama file gambar kamu
 const boomImage = new Image();
-boomImage.src = 'branch.png'; // Ganti dengan nama file gambar boom kamu
+boomImage.src = 'img/branch.png'; // Ganti dengan nama file gambar boom kamu
 const esImage = new Image();
-esImage.src = 'es.png'; // Ganti dengan nama file gambar boom kamu
+esImage.src = 'img/es.png'; // Ganti dengan nama file gambar boom kamu
 
 
 // Fungsi untuk menggambar gambar
@@ -146,10 +146,10 @@ for (let i = 0; i < es.length; i++) {
     es[i].y = Math.random() * -canvas.height;
     es[i].x = Math.random() * (canvas.width - gambarSize);
     isFrozen = true; // Membekukan semua gambar
-    document.body.style.backgroundImage = 'url(sakura_background.png)';
+    document.body.style.backgroundImage = 'url(img/sakura_background.png)';
     setTimeout(function() {
       isFrozen = false; // Membatalkan pembekuan setelah 3 detik
-      document.body.style.backgroundImage = 'url(sakura_background.png)';
+      document.body.style.backgroundImage = 'url(img/sakura_background.png)';
     }, 3000);
   }
 }
