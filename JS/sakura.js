@@ -1,3 +1,4 @@
+document.body.style.backgroundImage = 'url(img/sakura_background.png)';
 // Mendapatkan elemen canvas
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
