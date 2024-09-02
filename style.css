@@ -2,7 +2,7 @@ body {
     margin: 0;
     padding: 0;
     background-color: #f0f0f0;
-    font-family: Arial, sans-serif;
+    font-family: 'Open Sans';
 }
 
 /* HOME PAGE */
@@ -42,6 +42,7 @@ body {
       font-size: 14px;
       color: #fff;
      font-family: 'Open Sans';
+     margin-bottom: 20px;
     }
 
     .buttons {
@@ -63,7 +64,61 @@ body {
     .button-primary {
       background-color: #4CAF50; /* Green */
     }
+    
+        .farming {
+      margin-top: 20px;
+      display: flex;
+      justify-content: space-around;
+    }
+    .button-farming{
+      width: 100%;
+      height: 50px;
+      background-color: #4CAF50; 
+      margin-left: 25px;
+      margin-right: 25px;
+      border-radius: 50px;
+      font-size: 14px;
+      color: #fff;
+      font-family: 'Open Sans';
+      cursor: pointer;
+      position: relative;
+    }
+    
+    .button-farming.active {
+  background-color: #111;
+  color: #fff;
+}
+    
+    .progres-bar-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 50px;
+  overflow: hidden;
+}
+    
+   .progres-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  color: #fff;
+  font-size: 14px;
+  font-family: 'Open Sans';
+}
 
+.progres-bar-fill {
+  height: 100%;
+  background-color: #4CAF50;
+  border-radius: 0px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transition: width 0.5s ease-in-out;
+}
 
 .container2 {
             display: flex;
@@ -75,6 +130,7 @@ body {
             border-radius: 20px;
             padding: 20px;
             text-align: center;
+            text-decoration: none;
         }
         .card img {
             width: 60px;
@@ -88,9 +144,10 @@ body {
             font-size: 12px;
         }
         .arrow {
-            font-size: 24px;
+            font-size: 16px;
             margin-top: 10px;
             color: #fff;
+            font-family: 'Open Sans';
         }
 
 /* NAVBAR */
@@ -128,13 +185,9 @@ body {
 }
 
 .nav-bar a:hover {
-  color: #ccc; /* light gray text color on hover */
+  color: #4CAF50; /* light gray text color on hover */
 }
 
-.nav-bar a.active {
-  color: #66d9ef; /* blue text color for active link */
-  font-weight: bold; /* make the active link bold */
-}
 
 .nav-bar ul li a {
   display: flex;
@@ -144,4 +197,8 @@ body {
 
 .nav-bar ul li a img {
   margin-bottom: 10px;
+}
+
+.hidden {
+  display: none;
 }
