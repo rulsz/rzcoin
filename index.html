@@ -1,80 +1,241 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Splash Screen</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
-</head>
-<body>
-   <script src="https://telegram.org/js/telegram-web-app.js"></script>
-    <div class="home-page">
-        <!-- home page content will be displayed here -->
-          <div class="container">
-    <div class="header">
-      <h1>🌸 55,776</h1>
-      <div class="info" id="info">
-        Total Coin
-         </div>
-    </div>
-    </div>
-    
-    <div class="farming">
-<div class="button-farming">
-  <div class="progres-bar-container">
-    <div class="progres-bar-fill"></div>
-    <div class="progres-text">Farming</div>
-  </div>
-  <!-- button text here -->
-</div>
-    </div>
-    
-<div class="container2">
-  <div class="card">
-    <img src="img/calendar_icon.svg" alt="calendar">
-    <h2>Daily Check-in</h2>
-    <span class="arrow">→</span>
-  </div>
-<a class="card" href="sakura.html">
-  <img src="img/game_icon.png" alt="game-controller">
-  <h2>Play mini-game</h2>
-  <span class="arrow">🎟️ 1</span>
-</a>
-</div>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Web Page</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Afacad+Flux:wght@100..1000&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Afacad Flux', sans-serif;
+            user-select: none; /* Prevent text selection */
+        }
+        .header {
+            background-color: #1c1c1e; /* Slightly lighter gray shade */
+            border-radius: 20px; /* Changed border radius */
+            padding: 1rem;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        .coinCount {
+            color: #ffffff;
+            font-size: 1.25rem; /* Smaller font size */
+            font-weight: 700;
+            font-family: 'Afacad Flux', sans-serif;
+        }
+        .userName {
+            color: #b0b0b0;
+            font-size: 0.875rem;
+            font-family: 'Afacad Flux', sans-serif;
+        }
+        .game-section {
+            background-color: #1c1c1e; /* Slightly lighter gray shade */
+            border-radius: 0.5rem;
+            padding: 1rem;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        .farming-button {
+            background-color: #ffffff;
+            color: #000000;
+            font-weight: 700;
+            border-radius: 9999px;
+            width: 100%;
+            padding: 0.75rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+        }
+        .navigation-bar {
+            background-color: #000000; /* Changed background color */
+            border-radius: 0.5rem 0.5rem 0 0;
+            padding: 0.75rem;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 20;
+            outline: 1px solid #1c1c1e; /* Added smaller outline with color #1c1c1e */
+        }
+        .navigation-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: color 0.3s;
+        }
+        .navigation-item i {
+            font-size: 1.35rem; /* Slightly larger icon size */
+            margin-bottom: 0.25rem;
+            transition: transform 0.3s;
+        }
+        .navigation-item div {
+            font-size: 0.875rem;
+        }
+        .navigation-item:hover {
+            color: #4299e1;
+        }
+        .profile-image {
+            background-color: #4299e1;
+            border-radius: 9999px;
+            padding: 0;
+            overflow: hidden;
+            width: 3rem; /* Smaller size */
+            height: 3rem; /* Smaller size */
+        }
+        .profile-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    </style>
+    <script>
+        let farmingInterval;
+        let coins = 24172654;
 
-          </div>
-  
-        <!---navbar --->
-        <nav class="nav-bar">
-          <ul>
-            <li>
-              <a href="#tap">
-                <img src="img/home_icon.svg" alt="Tap Icon" width="25" height="25"class="nav-link">
-                Home
-              </a>
-            </li>
-            <li>
-              <a href="#mine">
-                <img src="img/ranking_icon.svg" alt="Mine Icon" width="25" height="25"class="nav-link">
-                Ranking
-              </a>
-            </li>
-            <li>
-              <a href="#task">
-                <img src="img/mission_icon.svg" alt="Task Icon" width="25" height="25"class="nav-link">
-                Mission
-              </a>
-            </li>
-            <li>
-              <a href="#friends">
-                <img src="img/friends_icon.svg" alt="Friends Icon" width="25" height="25">
-                Friends
-              </a>
-            </li>
-          </ul>
-        </nav>
+        function showSection(sectionId, iconId) {
+            // Hide all sections
+            document.getElementById('homeSection').style.display = 'none';
+            document.getElementById('earnSection').style.display = 'none';
+            document.getElementById('frensSection').style.display = 'none';
+            document.getElementById('walletSection').style.display = 'none';
+
+            // Show the selected section
+            document.getElementById(sectionId).style.display = 'block';
+
+            // Reset all icons to gray
+            document.getElementById('homeIcon').classList.remove('text-white');
+            document.getElementById('homeIcon').classList.add('text-gray-400');
+            document.getElementById('earnIcon').classList.remove('text-white');
+            document.getElementById('earnIcon').classList.add('text-gray-400');
+            document.getElementById('frensIcon').classList.remove('text-white');
+            document.getElementById('frensIcon').classList.add('text-gray-400');
+            document.getElementById('walletIcon').classList.remove('text-white');
+            document.getElementById('walletIcon').classList.add('text-gray-400');
+
+            // Set the selected icon to white
+            document.getElementById(iconId).classList.remove('text-gray-400');
+            document.getElementById(iconId).classList.add('text-white');
+
+            // Show or hide the farming button based on the section
+            if (sectionId === 'homeSection') {
+                document.getElementById('farmingButton').style.display = 'block';
+            } else {
+                document.getElementById('farmingButton').style.display = 'none';
+            }
+        }
+
+        function startFarming() {
+            const farmingButton = document.getElementById('farmingButton');
+            const farmingButtonText = farmingButton.querySelector('span');
+            const farmingButtonIcon = farmingButton.querySelector('i');
+
+            if (!farmingInterval) {
+                farmingInterval = setInterval(() => {
+                    coins += 1;
+                    document.getElementById('coinCount').innerText = `🌸 ${coins.toLocaleString('de-DE')}`;
+                }, 1000);
+                farmingButtonText.innerText = 'Stop farming';
+                farmingButtonIcon.classList.remove('fa-bolt');
+                farmingButtonIcon.classList.add('fa-stop');
+            } else {
+                clearInterval(farmingInterval);
+                farmingInterval = null;
+                farmingButtonText.innerText = 'Start farming';
+                farmingButtonIcon.classList.remove('fa-stop');
+                farmingButtonIcon.classList.add('fa-bolt');
+            }
+        }
+
+        function getUsernameFromUrl() {
+            const urlParams = new URLSearchParams(window.location.hash.substring(1));
+            const tgWebAppData = urlParams.get('tgWebAppData');
+            if (tgWebAppData) {
+                const decodedData = decodeURIComponent(tgWebAppData);
+                const userData = JSON.parse(decodeURIComponent(decodedData.split('user=')[1].split('&')[0]));
+                return userData.username;
+            }
+            return null;
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const username = getUsernameFromUrl();
+            if (username) {
+                document.getElementById('userName').innerText = username;
+            }
+        });
+    </script>
+</head>
+<body class="bg-black text-white font-sans">
+    <div class="flex flex-col items-center p-4 space-y-4 mb-24">
+        <!-- Home Section -->
+        <div id="homeSection" class="w-full">
+            <div class="header">
+                <div class="flex items-center">
+                    <div class="profile-image">
+                        <img alt="Profile image" src="https://rulsz.my.id/files/files/folder/logo.png"/>
+                    </div>
+                    <div class="ml-4">
+                        <div id="coinCount" class="coinCount">🌸 24.172.654</div>
+                        <div id="userName" class="userName">rulfdyyy</div>
+                    </div>
+                </div>
+                <button class="bg-[#282828] text-white rounded-full px-4 py-2 text-base">Open</button>
+            </div>
+            <div class="game-section">
+                <img alt="Drop game image" class="w-28 h-28" src="https://storage.googleapis.com/a1aa/image/z4lOPiS9MHqOO9oMMeU0xNUA1ZXGxwrNj144dzAYgNG2T5xJA.jpg"/>
+            </div>
+        </div>
+        <!-- Earn Section -->
+        <div id="earnSection" class="w-full" style="display: none;">
+            <div class="text-center text-2xl">Earn Section</div>
+        </div>
+        <!-- Frens Section -->
+        <div id="frensSection" class="w-full" style="display: none;">
+            <div class="text-center text-2xl">Frens Section</div>
+        </div>
+        <!-- Wallet Section -->
+        <div id="walletSection" class="w-full" style="display: none;">
+            <div class="text-center text-2xl">Wallet Section</div>
+        </div>
     </div>
-    <script src="script.js"></script>
+    <!-- Floating Start/Stop Farming Button -->
+    <div id="farmingButton" class="fixed bottom-24 left-0 right-0 px-4 z-10">
+        <button onclick="startFarming()" class="farming-button">
+            <i class="fas fa-bolt mr-2"></i>
+            <span>Start farming</span>
+        </button>
+    </div>
+    <!-- Floating Navigation Bar -->
+    <div class="navigation-bar">
+        <a href="#" class="navigation-item" onclick="showSection('homeSection', 'homeIcon')">
+            <i id="homeIcon" class="fas fa-home text-white"></i>
+            <div class="text-white">Home</div>
+        </a>
+        <a href="#" class="navigation-item" onclick="showSection('earnSection', 'earnIcon')">
+            <i id="earnIcon" class="fas fa-coins text-gray-400"></i>
+            <div class="text-gray-400">Earn</div>
+        </a>
+        <a href="#" class="navigation-item" onclick="showSection('frensSection', 'frensIcon')">
+            <i id="frensIcon" class="fas fa-users text-gray-400"></i>
+            <div class="text-gray-400">Frens</div>
+        </a>
+        <a href="#" class="navigation-item" onclick="showSection('walletSection', 'walletIcon')">
+            <i id="walletIcon" class="fas fa-wallet text-gray-400"></i>
+            <div class="text-gray-400">Wallet</div>
+        </a>
+    </div>
 </body>
 </html>
