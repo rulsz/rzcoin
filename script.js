@@ -1,5 +1,5 @@
 let farmingInterval;
-let coins = 24172654;
+let coins = 0;
 
 function showSection(sectionId, iconId) {
     // Hide all sections
@@ -88,6 +88,33 @@ function claimReward(reward) {
     coins += reward;
     document.getElementById('coinCount').innerText = `🌸 ${coins.toLocaleString('de-DE')}`;
 }
+
+function createSakuraEmoji() {
+    const sakuraContainer = document.getElementById('sakuraContainer');
+    const sakuraEmoji = document.createElement('div');
+    sakuraEmoji.classList.add('sakura-emoji');
+    sakuraEmoji.style.left = Math.random() * 100 + 'vw';
+    sakuraEmoji.style.animationDuration = Math.random() * 5 + 5 + 's'; // Durasi lebih lama
+    sakuraEmoji.innerHTML = '🌸';
+    sakuraContainer.appendChild(sakuraEmoji);
+
+    setTimeout(() => {
+        sakuraEmoji.remove();
+    }, 10000); // Durasi lebih lama
+}
+setInterval(createSakuraEmoji, 1500); // Interval lebih lama
+
+function claimSakura() {
+     coins += 1000;
+    document.getElementById('coinCount').innerText = `🌸 ${coins.toLocaleString('de-DE')}`;
+    document.getElementById('newUserDialog').classList.remove('show');
+}
+
+window.onload = function() {
+    setTimeout(function() {
+        document.getElementById('newUserDialog').classList.add('show');
+    }, 1000); // Tampilkan bottom sheet setelah 1 detik
+};
 
 document.addEventListener('DOMContentLoaded', () => {
     const username = getUsernameFromUrl();
