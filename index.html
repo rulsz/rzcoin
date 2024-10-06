@@ -1,182 +1,14 @@
 <html lang="en">
 <head>
     <meta charset="utf-8"/>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <title>Web Page</title>
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+    <title>RZ COIN</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Afacad+Flux:wght@100..1000&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Afacad Flux', sans-serif;
-            user-select: none; /* Prevent text selection */
-        }
-        .header {
-            background-color: #1c1c1e; /* Slightly lighter gray shade */
-            border-radius: 20px; /* Changed border radius */
-            padding: 1rem;
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1rem;
-        }
-        .coinCount {
-            color: #ffffff;
-            font-size: 1.25rem; /* Smaller font size */
-            font-weight: 700;
-            font-family: 'Afacad Flux', sans-serif;
-        }
-        .userName {
-            color: #b0b0b0;
-            font-size: 0.875rem;
-            font-family: 'Afacad Flux', sans-serif;
-        }
-        .game-section {
-            background-color: #1c1c1e; /* Slightly lighter gray shade */
-            border-radius: 0.5rem;
-            padding: 1rem;
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-bottom: 1rem;
-        }
-        .farming-button {
-            background-color: #ffffff;
-            color: #000000;
-            font-weight: 700;
-            border-radius: 9999px;
-            width: 100%;
-            padding: 0.75rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1rem;
-        }
-        .navigation-bar {
-            background-color: #000000; /* Changed background color */
-            border-radius: 0.5rem 0.5rem 0 0;
-            padding: 0.75rem;
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            z-index: 20;
-            outline: 1px solid #1c1c1e; /* Added smaller outline with color #1c1c1e */
-        }
-        .navigation-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            transition: color 0.3s;
-        }
-        .navigation-item i {
-            font-size: 1.35rem; /* Slightly larger icon size */
-            margin-bottom: 0.25rem;
-            transition: transform 0.3s;
-        }
-        .navigation-item div {
-            font-size: 0.875rem;
-        }
-        .navigation-item:hover {
-            color: #4299e1;
-        }
-        .profile-image {
-            background-color: #4299e1;
-            border-radius: 9999px;
-            padding: 0;
-            overflow: hidden;
-            width: 3rem; /* Smaller size */
-            height: 3rem; /* Smaller size */
-        }
-        .profile-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-    </style>
-    <script>
-        let farmingInterval;
-        let coins = 24172654;
-
-        function showSection(sectionId, iconId) {
-            // Hide all sections
-            document.getElementById('homeSection').style.display = 'none';
-            document.getElementById('earnSection').style.display = 'none';
-            document.getElementById('frensSection').style.display = 'none';
-            document.getElementById('walletSection').style.display = 'none';
-
-            // Show the selected section
-            document.getElementById(sectionId).style.display = 'block';
-
-            // Reset all icons to gray
-            document.getElementById('homeIcon').classList.remove('text-white');
-            document.getElementById('homeIcon').classList.add('text-gray-400');
-            document.getElementById('earnIcon').classList.remove('text-white');
-            document.getElementById('earnIcon').classList.add('text-gray-400');
-            document.getElementById('frensIcon').classList.remove('text-white');
-            document.getElementById('frensIcon').classList.add('text-gray-400');
-            document.getElementById('walletIcon').classList.remove('text-white');
-            document.getElementById('walletIcon').classList.add('text-gray-400');
-
-            // Set the selected icon to white
-            document.getElementById(iconId).classList.remove('text-gray-400');
-            document.getElementById(iconId).classList.add('text-white');
-
-            // Show or hide the farming button based on the section
-            if (sectionId === 'homeSection') {
-                document.getElementById('farmingButton').style.display = 'block';
-            } else {
-                document.getElementById('farmingButton').style.display = 'none';
-            }
-        }
-
-        function startFarming() {
-            const farmingButton = document.getElementById('farmingButton');
-            const farmingButtonText = farmingButton.querySelector('span');
-            const farmingButtonIcon = farmingButton.querySelector('i');
-
-            if (!farmingInterval) {
-                farmingInterval = setInterval(() => {
-                    coins += 1;
-                    document.getElementById('coinCount').innerText = `🌸 ${coins.toLocaleString('de-DE')}`;
-                }, 1000);
-                farmingButtonText.innerText = 'Stop farming';
-                farmingButtonIcon.classList.remove('fa-bolt');
-                farmingButtonIcon.classList.add('fa-stop');
-            } else {
-                clearInterval(farmingInterval);
-                farmingInterval = null;
-                farmingButtonText.innerText = 'Start farming';
-                farmingButtonIcon.classList.remove('fa-stop');
-                farmingButtonIcon.classList.add('fa-bolt');
-            }
-        }
-
-        function getUsernameFromUrl() {
-            const urlParams = new URLSearchParams(window.location.hash.substring(1));
-            const tgWebAppData = urlParams.get('tgWebAppData');
-            if (tgWebAppData) {
-                const decodedData = decodeURIComponent(tgWebAppData);
-                const userData = JSON.parse(decodeURIComponent(decodedData.split('user=')[1].split('&')[0]));
-                return userData.username;
-            }
-            return null;
-        }
-
-        document.addEventListener('DOMContentLoaded', () => {
-            const username = getUsernameFromUrl();
-            if (username) {
-                document.getElementById('userName').innerText = username;
-            }
-        });
-    </script>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body class="bg-black text-white font-sans">
     <div class="flex flex-col items-center p-4 space-y-4 mb-24">
@@ -200,7 +32,107 @@
         </div>
         <!-- Earn Section -->
         <div id="earnSection" class="w-full" style="display: none;">
-            <div class="text-center text-2xl">Earn Section</div>
+            <div class="max-w-md mx-auto p-4 space-y-4">
+                <!-- Task 1 -->
+                <div class="bg-[#1c1c1e] p-4 rounded-lg flex items-center justify-between task">
+                    <div class="flex items-center space-x-2 task-info">
+                        <i class="fas fa-times text-gray-400"></i>
+                        <div class="task-details">
+                            <div class="task-title">Follow RZ COIN Twitter</div>
+                            <div class="task-reward">Reward: <span class="text-white">+300</span> 🌸 <span class="text-white">0.1</span> <i class="fas fa-info-circle"></i></div>
+                        </div>
+                    </div>
+                    <button class="bg-[#282828] text-white px-4 py-1 rounded-lg" onclick="goToTask(this, 300)">Go</button>
+                </div>
+                <!-- Task 2 -->
+                <div class="bg-[#1c1c1e] p-4 rounded-lg flex items-center justify-between task">
+                    <div class="flex items-center space-x-2 task-info">
+                        <i class="fas fa-paper-plane text-gray-400"></i>
+                        <div class="task-details">
+                            <div class="task-title">Story time with $RZ!</div>
+                            <div class="task-reward">Reward: <span class="text-white">+2,000</span> 🌸 <span class="text-white">0.1</span> <i class="fas fa-info-circle"></i></div>
+                        </div>
+                    </div>
+                    <button class="bg-[#282828] text-white px-4 py-1 rounded-lg" onclick="goToTask(this, 2000)">Go</button>
+                </div>
+                <!-- Task 3 -->
+                <div class="bg-[#1c1c1e] p-4 rounded-lg flex items-center justify-between task">
+                    <div class="flex items-center space-x-2 task-info">
+                        <i class="fas fa-times text-gray-400"></i>
+                        <div class="task-details">
+                            <div class="task-title">Check Bitget's Article about RZ COIN</div>
+                            <div class="task-reward">Reward: <span class="text-white">+300</span> 🌸</div>
+                        </div>
+                    </div>
+                    <button class="bg-[#282828] text-white px-4 py-1 rounded-lg" onclick="goToTask(this, 300)">Go</button>
+                </div>
+                <!-- Task 4 -->
+                <div class="bg-[#1c1c1e] p-4 rounded-lg flex items-center justify-between task">
+                    <div class="flex items-center space-x-2 task-info">
+                        <i class="fab fa-tiktok text-gray-400"></i>
+                        <div class="task-details">
+                            <div class="task-title">Like and repost TikTok video</div>
+                            <div class="task-reward">Reward: <span class="text-white">+300</span> 🌸</div>
+                        </div>
+                    </div>
+                    <button class="bg-[#282828] text-white px-4 py-1 rounded-lg" onclick="goToTask(this, 300)">Go</button>
+                </div>
+                <!-- Task 5 -->
+                <div class="bg-[#1c1c1e] p-4 rounded-lg flex items-center justify-between task">
+                    <div class="flex items-center space-x-2 task-info">
+                        <i class="fab fa-tiktok text-gray-400"></i>
+                        <div class="task-details">
+                            <div class="task-title">Follow RZ COIN TikTok</div>
+                            <div class="task-reward">Reward: <span class="text-white">+300</span> 🌸</div>
+                        </div>
+                    </div>
+                    <button class="bg-[#282828] text-white px-4 py-1 rounded-lg" onclick="goToTask(this, 300)">Go</button>
+                </div>
+                <!-- Task 6 -->
+                <div class="bg-[#1c1c1e] p-4 rounded-lg flex items-center justify-between task">
+                    <div class="flex items-center space-x-2 task-info">
+                        <i class="fas fa-times text-gray-400"></i>
+                        <div class="task-details">
+                            <div class="task-title">RZ COIN X Bitget: Giveaway $1000 in $TON</div>
+                            <div class="task-reward">Reward: <span class="text-white">+300</span> 🌸</div>
+                        </div>
+                    </div>
+                    <button class="bg-[#282828] text-white px-4 py-1 rounded-lg" onclick="goToTask(this, 300)">Go</button>
+                </div>
+                <!-- Task 7 -->
+                <div class="bg-[#1c1c1e] p-4 rounded-lg flex items-center justify-between task">
+                    <div class="flex items-center space-x-2 task-info">
+                        <i class="fas fa-times text-gray-400"></i>
+                        <div class="task-details">
+                            <div class="task-title">RZ COIN X OKX Wallet: OKX Connect Integration</div>
+                            <div class="task-reward">Reward: <span class="text-white">+300</span> 🌸</div>
+                        </div>
+                    </div>
+                    <button class="bg-[#282828] text-white px-4 py-1 rounded-lg" onclick="goToTask(this, 300)">Go</button>
+                </div>
+                <!-- Task 8 -->
+                <div class="bg-[#1c1c1e] p-4 rounded-lg flex items-center justify-between task">
+                    <div class="flex items-center space-x-2 task-info">
+                        <i class="fas fa-gamepad text-gray-400"></i>
+                        <div class="task-details">
+                            <div class="task-title">Play Lucky Number</div>
+                            <div class="task-reward">Reward: <span class="text-white">+20,000</span> 🌸</div>
+                        </div>
+                    </div>
+                    <button class="bg-[#282828] text-white px-4 py-1 rounded-lg" onclick="goToTask(this, 20000)">Go</button>
+                </div>
+                <!-- Task 9 -->
+                <div class="bg-[#1c1c1e] p-4 rounded-lg flex items-center justify-between task">
+                    <div class="flex items-center space-x-2 task-info">
+                        <i class="fas fa-gamepad text-gray-400"></i>
+                        <div class="task-details">
+                            <div class="task-title">Play Lucky Scratch</div>
+                            <div class="task-reward">Reward: <span class="text-white">+20,000</span> 🌸</div>
+                        </div>
+                    </div>
+                    <button class="bg-[#282828] text-white px-4 py-1 rounded-lg" onclick="goToTask(this, 20000)">Go</button>
+                </div>
+            </div>
         </div>
         <!-- Frens Section -->
         <div id="frensSection" class="w-full" style="display: none;">
@@ -237,5 +169,6 @@
             <div class="text-gray-400">Wallet</div>
         </a>
     </div>
+    <script src="script.js"></script>
 </body>
 </html>
