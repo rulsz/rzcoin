@@ -94,11 +94,11 @@ body {
 .task {
     background-color: #1c1c1e;
     padding: 1rem;
-    border-radius: 20px;
+    border-radius: 1rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    
+
 }
 .task .task-info {
     display: flex;
