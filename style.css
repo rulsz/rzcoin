@@ -1,6 +1,8 @@
 body {
     font-family: 'Afacad Flux', sans-serif;
     user-select: none; /* Prevent text selection */
+    background-color: #000;
+    color: #fff;
 }
 .header {
     background-color: #1c1c1e; /* Slightly lighter gray shade */
@@ -91,16 +93,15 @@ body {
     height: 100%;
     object-fit: cover;
 }
-
 .task {
-    background-color: #1c1c1e;
-    padding: 1rem;
-    margin-bottom: 15px;
-    border-radius: 1rem;
-    display: flex;
-    justify-content: space-between;
+    background-color: #1c1c1e; 
+    padding: 1rem; 
+    margin-bottom: 15px; 
+    border-radius: 1rem; 
+    display: flex; 
+    justify-content: space-between; 
     align-items: center;
-
+   
 }
 .task .task-info {
     display: flex;
@@ -139,4 +140,63 @@ body {
 }
 .task button.claim {
     background-color: #00BFFF; /* Light blue color */
+}
+.sakura-emoji {
+    position: absolute;
+    font-size: 15px;
+    animation: fall linear infinite;
+}
+@keyframes fall {
+    0% {
+        transform: translateY(-100px) rotate(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(100vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+.dialog {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    top: 0; /* Full height */
+    background-color: #1c1c1e;
+    padding: 3rem; /* Lebih besar */
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.5);
+    z-index: 30; /* Lebih tinggi dari bilah navigasi */
+    text-align: center;
+    transform: translateY(100%);
+    transition: transform 0.3s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.dialog.show {
+    transform: translateY(0);
+}
+.dialog h2 {
+    color: #ffffff;
+    font-family: 'Afacad Flux', sans-serif;
+    margin-bottom: 1.5rem; /* Lebih besar */
+    font-size: 1.5rem; /* Lebih besar */
+}
+.dialog p {
+    color: #b0b0b0;
+    font-family: 'Afacad Flux', sans-serif;
+    margin-bottom: 2rem; /* Lebih besar */
+    font-size: 1.25rem; /* Lebih besar */
+}
+.dialog button {
+    background-color: #00BFFF;
+    color: #ffffff;
+    padding: 0.75rem 1.5rem; /* Lebih besar */
+    border-radius: 50px;
+    font-family: 'Afacad Flux', sans-serif;
+    cursor: pointer;
+    font-size: 1rem; /* Lebih besar */
 }
