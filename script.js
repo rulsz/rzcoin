@@ -55,6 +55,7 @@ function startFarming() {
     }
 }
 
+
 function getUsernameFromUrl() {
     const urlParams = new URLSearchParams(window.location.hash.substring(1));
     const tgWebAppData = urlParams.get('tgWebAppData');
@@ -65,6 +66,13 @@ function getUsernameFromUrl() {
     }
     return null;
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+    const username = getUsernameFromUrl();
+    if (username) {
+        document.getElementById('userName').innerText = username;
+    }
+});
 
 function goToTask(button, reward) {
     window.open('https://rulsz.eu.org', '_blank');
