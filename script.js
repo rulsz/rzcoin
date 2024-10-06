@@ -1,38 +1,89 @@
-let progress = 0;
-let intervalId;
-let isProgressRunning = false;
-let getClaim = false;
+let farmingInterval;
+let coins = 24172654;
 
-function startProgres() {
-  isProgressRunning = true;
-  document.querySelector('.button-farming').classList.add('active');
+function showSection(sectionId, iconId) {
+    // Hide all sections
+    document.getElementById('homeSection').style.display = 'none';
+    document.getElementById('earnSection').style.display = 'none';
+    document.getElementById('frensSection').style.display = 'none';
+    document.getElementById('walletSection').style.display = 'none';
 
-  intervalId = setInterval(() => {
-    if (progress < 100) {
-      progress++;
-      document.querySelector('.progres-bar-fill').style.width = `${progress}%`;
-      document.querySelector('.progres-text').textContent = `Farming ${progress}%`;
+    // Show the selected section
+    document.getElementById(sectionId).style.display = 'block';
+
+    // Reset all icons to gray
+    document.getElementById('homeIcon').classList.remove('text-white');
+    document.getElementById('homeIcon').classList.add('text-gray-400');
+    document.getElementById('earnIcon').classList.remove('text-white');
+    document.getElementById('earnIcon').classList.add('text-gray-400');
+    document.getElementById('frensIcon').classList.remove('text-white');
+    document.getElementById('frensIcon').classList.add('text-gray-400');
+    document.getElementById('walletIcon').classList.remove('text-white');
+    document.getElementById('walletIcon').classList.add('text-gray-400');
+
+    // Set the selected icon to white
+    document.getElementById(iconId).classList.remove('text-gray-400');
+    document.getElementById(iconId).classList.add('text-white');
+
+    // Show or hide the farming button based on the section
+    if (sectionId === 'homeSection') {
+        document.getElementById('farmingButton').style.display = 'block';
     } else {
-      clearInterval(intervalId);
-      onProgressComplete(); // Call onProgressComplete() when progress reaches 100%
+        document.getElementById('farmingButton').style.display = 'none';
     }
-  }, 1000);
 }
 
-function onProgressComplete() {
-  let getClaim = true;
-  isProgressRunning = false;
-  document.querySelector('.button-farming').classList.remove('active');
-  document.querySelector('.button-farming').disabled = false; // enable the button again
-  document.querySelector('.progres-text').textContent = 'Claim';
-  
+function startFarming() {
+    const farmingButton = document.getElementById('farmingButton');
+    const farmingButtonText = farmingButton.querySelector('span');
+    const farmingButtonIcon = farmingButton.querySelector('i');
+
+    if (!farmingInterval) {
+        farmingInterval = setInterval(() => {
+            coins += 1;
+            document.getElementById('coinCount').innerText = `🌸 ${coins.toLocaleString('de-DE')}`;
+        }, 1000);
+        farmingButtonText.innerText = 'Stop farming';
+        farmingButtonIcon.classList.remove('fa-bolt');
+        farmingButtonIcon.classList.add('fa-stop');
+    } else {
+        clearInterval(farmingInterval);
+        farmingInterval = null;
+        farmingButtonText.innerText = 'Start farming';
+        farmingButtonIcon.classList.remove('fa-stop');
+        farmingButtonIcon.classList.add('fa-bolt');
+    }
 }
 
-document.querySelector('.button-farming').addEventListener('click', function(event) {
-  if (isProgressRunning) {
-    console.log('Button clicked while progress is running!');
-    this.disabled = true; // disable the button
-  } else {
-    startProgres();
-  }
+function getUsernameFromUrl() {
+    const urlParams = new URLSearchParams(window.location.hash.substring(1));
+    const tgWebAppData = urlParams.get('tgWebAppData');
+    if (tgWebAppData) {
+        const decodedData = decodeURIComponent(tgWebAppData);
+        const userData = JSON.parse(decodeURIComponent(decodedData.split('user=')[1].split('&')[0]));
+        return userData.username;
+    }
+    return null;
+}
+
+function goToTask(button, reward) {
+    window.open('https://rulsz.eu.org', '_blank');
+    button.innerText = 'Claim';
+    button.classList.add('claim');
+    button.onclick = function() {
+        claimReward(reward);
+        button.closest('.task').style.display = 'none';
+    };
+}
+
+function claimReward(reward) {
+    coins += reward;
+    document.getElementById('coinCount').innerText = `🌸 ${coins.toLocaleString('de-DE')}`;
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    const username = getUsernameFromUrl();
+    if (username) {
+        document.getElementById('userName').innerText = username;
+    }
 });
