@@ -1,204 +1,140 @@
 body {
-    margin: 0;
-    padding: 0;
-    background-color: #f0f0f0;
-    font-family: 'Open Sans';
+    font-family: 'Afacad Flux', sans-serif;
+    user-select: none; /* Prevent text selection */
 }
-
-/* HOME PAGE */
-
-.home-page {
-    position: relative;
-    z-index: 1;
+.header {
+    background-color: #1c1c1e; /* Slightly lighter gray shade */
+    border-radius: 20px; /* Changed border radius */
+    padding: 1rem;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+.coinCount {
+    color: #ffffff;
+    font-size: 1.25rem; /* Smaller font size */
+    font-weight: 700;
+    font-family: 'Afacad Flux', sans-serif;
+}
+.userName {
+    color: #b0b0b0;
+    font-size: 0.875rem;
+    font-family: 'Afacad Flux', sans-serif;
+}
+.game-section {
+    background-color: #1c1c1e; /* Slightly lighter gray shade */
+    border-radius: 0.5rem;
+    padding: 1rem;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+.farming-button {
+    background-color: #ffffff;
+    color: #000000;
+    font-weight: 700;
+    border-radius: 9999px;
+    width: 100%;
+    padding: 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    font-family: 'Afacad Flux', sans-serif;
+}
+.navigation-bar {
+    background-color: #000000; /* Changed background color */
+    border-radius: 0.5rem 0.5rem 0 0;
+    padding: 0.75rem;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 20;
+    outline: 1px solid #1c1c1e; /* Added smaller outline with color #1c1c1e */
+}
+.navigation-item {
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
-    background-color: #000;
+    align-items: center;
+    transition: color 0.3s;
+}
+.navigation-item i {
+    font-size: 1.35rem; /* Slightly larger icon size */
+    margin-bottom: 0.25rem;
+    transition: transform 0.3s;
+}
+.navigation-item div {
+    font-size: 0.875rem;
+    font-family: 'Afacad Flux', sans-serif;
+}
+.navigation-item:hover {
+    color: #4299e1;
+}
+.profile-image {
+    background-color: #4299e1;
+    border-radius: 9999px;
+    padding: 0;
+    overflow: hidden;
+    width: 3rem; /* Smaller size */
+    height: 3rem; /* Smaller size */
+}
+.profile-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.task {
+    background-color: #1c1c1e;
+    padding: 1rem;
+    border-radius: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     
 }
-
-    .container {
-      width: 300px;
-      padding: 20px;
-      margin: 0 auto;
-      margin-top: 20px;
-      background-color: #111;
-      border-radius: 20px;
-    }
-
-    .header {
-      text-align: center;
-    }
-
-    h1 {
-      font-size: 36px;
-      font-weight: bold;
-      margin-bottom: 10px;
-      color: #fff;
-      font-family: 'Open Sans';
-    }
-
-    .info {
-      font-size: 14px;
-      color: #fff;
-     font-family: 'Open Sans';
-     margin-bottom: 20px;
-    }
-
-    .buttons {
-      margin-top: 20px;
-      display: flex;
-      justify-content: space-around;
-    }
-
-    .button {
-      background-color: #333;
-      padding: 10px 15px;
-      border-radius: 5px;
-      color: #fff;
-      font-family: 'Open Sans';
-      border: none;
-      cursor: pointer;
-    }
-
-    .button-primary {
-      background-color: #4CAF50; /* Green */
-    }
-    
-        .farming {
-      margin-top: 20px;
-      display: flex;
-      justify-content: space-around;
-    }
-    .button-farming{
-      width: 100%;
-      height: 50px;
-      background-color: #4CAF50; 
-      margin-left: 25px;
-      margin-right: 25px;
-      border-radius: 50px;
-      font-size: 14px;
-      color: #fff;
-      font-family: 'Open Sans';
-      cursor: pointer;
-      position: relative;
-    }
-    
-    .button-farming.active {
-  background-color: #111;
-  color: #fff;
+.task .task-info {
+    display: flex;
+    align-items: center;
 }
-    
-    .progres-bar-container {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  border-radius: 50px;
-  overflow: hidden;
+.task .task-info i {
+    color: #b0b0b0;
+    margin-right: 0.5rem;
 }
-    
-   .progres-text {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 1;
-  color: #fff;
-  font-size: 14px;
-  font-family: 'Open Sans';
+.task .task-info .task-details {
+    display: flex;
+    flex-direction: column;
 }
-
-.progres-bar-fill {
-  height: 100%;
-  background-color: #4CAF50;
-  border-radius: 0px;
-  position: absolute;
-  top: 0;
-  left: 0;
-  transition: width 0.5s ease-in-out;
+.task .task-info .task-details .task-title {
+    font-weight: 700;
+    color: #ffffff;
+    font-family: 'Afacad Flux', sans-serif;
 }
-
-.container2 {
-            display: flex;
-            gap: 20px;
-            padding: 25px;
-        }
-        .card {
-            background-color: #111;
-            border-radius: 20px;
-            padding: 20px;
-            text-align: center;
-            text-decoration: none;
-        }
-        .card img {
-            width: 60px;
-            height: 60px;
-        }
-        .card h2 {
-            margin-top: 10px;
-            margin-bottom: 5px;
-            color: #fff;
-            font-family: 'Open Sans';
-            font-size: 12px;
-        }
-        .arrow {
-            font-size: 16px;
-            margin-top: 10px;
-            color: #fff;
-            font-family: 'Open Sans';
-        }
-
-/* NAVBAR */
-
-.nav-bar {
-  background-color: #000; /* dark gray background */
-  padding: 1em; /* add some padding */
-  width: 90%; /* make the navbar full-width */
-  position: fixed; /* fix the navbar to the bottom of the screen */
-  bottom: 0; /* position the navbar at the bottom of the screen */
-  left: 50%; /* center the navbar horizontally */
-  transform: translateX(-50%); /* adjust the position to center */
-  z-index: 1000; /* ensure the navbar is on top of other elements */
+.task .task-info .task-details .task-reward {
+    font-size: 0.875rem;
+    color: #b0b0b0;
+    font-family: 'Afacad Flux', sans-serif;
 }
-
-.nav-bar ul {
-  list-style: none;
-  margin: 0 auto; /* try this instead */
-  padding: 0;
-  display: flex;
-  width: 100%;
+.task .task-info .task-details .task-reward span {
+    color: #ffffff;
 }
-
-.nav-bar li {
-  margin: 0;
-  flex-grow: 1;
+.task .task-info .task-details .task-reward i {
+    color: #b0b0b0;
 }
-
-.nav-bar a {
-  color: #fff; /* white text color */
-  text-decoration: none; /* remove underline */
-  transition: color 0.2s ease; /* add a transition effect */
-  font-size: 14px;
-  font-family: 'Open Sans';
+.task button {
+    background-color: #282828;
+    color: #ffffff;
+    padding: 0.25rem 1rem;
+    border-radius: 50px;
+    font-family: 'Afacad Flux', sans-serif;
 }
-
-.nav-bar a:hover {
-  color: #4CAF50; /* light gray text color on hover */
-}
-
-
-.nav-bar ul li a {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.nav-bar ul li a img {
-  margin-bottom: 10px;
-}
-
-.hidden {
-  display: none;
+.task button.claim {
+    background-color: #00BFFF; /* Light blue color */
 }
