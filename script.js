@@ -1,6 +1,5 @@
 let farmingInterval;
-let coins = 0;
-
+    
 function showSection(sectionId, iconId) {
     // Hide all sections
     document.getElementById('homeSection').style.display = 'none';
@@ -33,46 +32,51 @@ function showSection(sectionId, iconId) {
     }
 }
 
+// Function to start farming
 function startFarming() {
-    const farmingButton = document.getElementById('farmingButton');
-    const farmingButtonText = farmingButton.querySelector('span');
-    const farmingButtonIcon = farmingButton.querySelector('i');
-
-    if (!farmingInterval) {
-        farmingInterval = setInterval(() => {
-            coins += 1;
-            document.getElementById('coinCount').innerText = `🌸 ${coins.toLocaleString('de-DE')}`;
-        }, 1000);
-        farmingButtonText.innerText = 'Stop farming';
-        farmingButtonIcon.classList.remove('fa-bolt');
-        farmingButtonIcon.classList.add('fa-stop');
-    } else {
-        clearInterval(farmingInterval);
-        farmingInterval = null;
-        farmingButtonText.innerText = 'Start farming';
-        farmingButtonIcon.classList.remove('fa-stop');
-        farmingButtonIcon.classList.add('fa-bolt');
+  const farmingButton = document.getElementById('farmingButton');
+  const farmingButtonIcon = farmingButton.querySelector('i');
+  const farmingButtonSpan = farmingButton.querySelector('span');
+  // Check if farming is currently running
+  if (farmingButtonIcon.classList.contains('fa-stop-circle')) {
+    // Stop farming
+    farmingButtonIcon.classList.remove('fa-stop-circle');
+    farmingButtonIcon.classList.add('fa-bolt');
+    farmingButtonSpan.textContent = 'Start farming';
+    clearInterval(farmingInterval); // Stop the interval
+  } else {
+    // Start farming
+    farmingButtonIcon.classList.remove('fa-bolt');
+    farmingButtonIcon.classList.add('fa-stop-circle');
+    farmingButtonSpan.textContent = 'Stop farming';
+    farmingInterval = setInterval(updateCoinCount, 1000); // Update every second
+  }
+}
+// Function to update the coin count
+async function updateCoinCount() {
+  const coinCount = document.getElementById('coinCount');
+  let currentCoins = parseInt(coinCount.textContent.replace('🌸 ', ''), 10); // Get current coins
+  // Fetch the latest coin value from Firebase
+  try {
+    coinValue = await getCoinValue(); // Await the promise to get the value
+    // Update the coin count if farming is active
+    if (document.getElementById('farmingButton').querySelector('i').classList.contains('fa-stop-circle')) {
+      currentCoins += coinValue; // Update currentCoins directly
+      coinCount.textContent = '🌸 ' + currentCoins; // Update UI
+      // Update the coin value in Firebase
+      const userID = getUserIDFromUrl();
+      if (userID) {
+        set(ref(database, 'users/' + userID), {
+          userid: userID,
+          coin: currentCoins // Update coin in Firebase
+        });
+      }
     }
+  } catch (error) {
+    console.error('Error updating coin count:', error);
+  }
 }
 
-
-function getUsernameFromUrl() {
-    const urlParams = new URLSearchParams(window.location.hash.substring(1));
-    const tgWebAppData = urlParams.get('tgWebAppData');
-    if (tgWebAppData) {
-        const decodedData = decodeURIComponent(tgWebAppData);
-        const userData = JSON.parse(decodeURIComponent(decodedData.split('user=')[1].split('&')[0]));
-        return userData.username;
-    }
-    return null;
-}
-
-document.addEventListener('DOMContentLoaded', () => {
-    const username = getUsernameFromUrl();
-    if (username) {
-        document.getElementById('userName').innerText = username;
-    }
-});
 
 function goToTask(button, reward) {
     window.open('https://rulsz.eu.org', '_blank');
@@ -103,22 +107,3 @@ function createSakuraEmoji() {
     }, 10000); // Durasi lebih lama
 }
 setInterval(createSakuraEmoji, 1500); // Interval lebih lama
-
-function claimSakura() {
-     coins += 1000;
-    document.getElementById('coinCount').innerText = `🌸 ${coins.toLocaleString('de-DE')}`;
-    document.getElementById('newUserDialog').classList.remove('show');
-}
-
-window.onload = function() {
-    setTimeout(function() {
-        document.getElementById('newUserDialog').classList.add('show');
-    }, 1000); // Tampilkan bottom sheet setelah 1 detik
-};
-
-document.addEventListener('DOMContentLoaded', () => {
-    const username = getUsernameFromUrl();
-    if (username) {
-        document.getElementById('userName').innerText = username;
-    }
-});
