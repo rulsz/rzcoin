@@ -1,202 +1,199 @@
 body {
-    font-family: 'Afacad Flux', sans-serif;
-    user-select: none; /* Prevent text selection */
-    background-color: #000;
-    color: #fff;
+  font-family: 'Afacad Flux', sans-serif;
+  user-select: none; /* Prevent text selection */
+  background-color: #000;
+  color: #fff;
 }
 .header {
-    background-color: #1c1c1e; /* Slightly lighter gray shade */
-    border-radius: 20px; /* Changed border radius */
-    padding: 1rem;
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1rem;
+  background-color: #1c1c1e; /* Slightly lighter gray shade */
+  border-radius: 20px; /* Changed border radius */
+  padding: 1rem;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
 }
 .coinCount {
-    color: #ffffff;
-    font-size: 1.25rem; /* Smaller font size */
-    font-weight: 700;
-    font-family: 'Afacad Flux', sans-serif;
+  color: #ffffff;
+  font-size: 1.25rem; /* Smaller font size */
+  font-weight: 700;
+  font-family: 'Afacad Flux', sans-serif;
 }
 .userName {
-    color: #b0b0b0;
-    font-size: 0.875rem;
-    font-family: 'Afacad Flux', sans-serif;
+  color: #b0b0b0;
+  font-size: 0.875rem;
+  font-family: 'Afacad Flux', sans-serif;
 }
 .game-section {
-    background-color: #1c1c1e; /* Slightly lighter gray shade */
-    border-radius: 0.5rem;
-    padding: 1rem;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 1rem;
+  background-color: #1c1c1e; /* Slightly lighter gray shade */
+  border-radius: 0.5rem;
+  padding: 1rem;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1rem;
 }
 .farming-button {
-    background-color: #ffffff;
-    color: #000000;
-    font-weight: 700;
-    border-radius: 9999px;
-    width: 100%;
-    padding: 0.75rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1rem;
-    font-family: 'Afacad Flux', sans-serif;
+  background-color: #ffffff;
+  color: #000000;
+  font-weight: 700;
+  border-radius: 9999px;
+  width: 100%;
+  padding: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  font-family: 'Afacad Flux', sans-serif;
 }
 .navigation-bar {
-    background-color: #000000; /* Changed background color */
-    border-radius: 0.5rem 0.5rem 0 0;
-    padding: 0.75rem;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    z-index: 20;
-    outline: 1px solid #1c1c1e; /* Added smaller outline with color #1c1c1e */
+  background-color: #000000; /* Changed background color */
+  border-radius: 0.5rem 0.5rem 0 0;
+  padding: 0.75rem;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 20;
+  outline: 1px solid #1c1c1e; /* Added smaller outline with color #1c1c1e */
 }
 .navigation-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    transition: color 0.3s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: color 0.3s;
 }
 .navigation-item i {
-    font-size: 1.35rem; /* Slightly larger icon size */
-    margin-bottom: 0.25rem;
-    transition: transform 0.3s;
+  font-size: 1.35rem; /* Slightly larger icon size */
+  margin-bottom: 0.25rem;
+  transition: transform 0.3s;
 }
 .navigation-item div {
-    font-size: 0.875rem;
-    font-family: 'Afacad Flux', sans-serif;
+  font-size: 0.875rem;
+  font-family: 'Afacad Flux', sans-serif;
 }
 .navigation-item:hover {
-    color: #4299e1;
+  color: #4299e1;
 }
 .profile-image {
-    background-color: #4299e1;
-    border-radius: 9999px;
-    padding: 0;
-    overflow: hidden;
-    width: 3rem; /* Smaller size */
-    height: 3rem; /* Smaller size */
+  background-color: #4299e1;
+  border-radius: 9999px;
+  padding: 0;
+  overflow: hidden;
+  width: 3rem; /* Smaller size */
+  height: 3rem; /* Smaller size */
 }
 .profile-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 .task {
-    background-color: #1c1c1e; 
-    padding: 1rem; 
-    margin-bottom: 15px; 
-    border-radius: 1rem; 
-    display: flex; 
-    justify-content: space-between; 
-    align-items: center;
-   
+  background-color: #1c1c1e; 
+  padding: 1rem; 
+  margin-bottom: 15px; 
+  border-radius: 1rem; 
+  display: flex; 
+  justify-content: space-between; 
+  align-items: center;
+
 }
 .task .task-info {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 .task .task-info i {
-    color: #b0b0b0;
-    margin-right: 0.5rem;
+  color: #b0b0b0;
+  margin-right: 0.5rem;
 }
 .task .task-info .task-details {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 .task .task-info .task-details .task-title {
-    font-weight: 700;
-    color: #ffffff;
-    font-family: 'Afacad Flux', sans-serif;
+  font-weight: 700;
+  color: #ffffff;
+  font-family: 'Afacad Flux', sans-serif;
 }
 .task .task-info .task-details .task-reward {
-    font-size: 0.875rem;
-    color: #b0b0b0;
-    font-family: 'Afacad Flux', sans-serif;
+  font-size: 0.875rem;
+  color: #b0b0b0;
+  font-family: 'Afacad Flux', sans-serif;
 }
 .task .task-info .task-details .task-reward span {
-    color: #ffffff;
+  color: #ffffff;
 }
 .task .task-info .task-details .task-reward i {
-    color: #b0b0b0;
+  color: #b0b0b0;
 }
 .task button {
-    background-color: #282828;
-    color: #ffffff;
-    padding: 0.25rem 1rem;
-    border-radius: 50px;
-    font-family: 'Afacad Flux', sans-serif;
+  background-color: #282828;
+  color: #ffffff;
+  padding: 0.25rem 1rem;
+  border-radius: 50px;
+  font-family: 'Afacad Flux', sans-serif;
 }
 .task button.claim {
-    background-color: #00BFFF; /* Light blue color */
+  background-color: #00BFFF; /* Light blue color */
 }
 .sakura-emoji {
-    position: absolute;
-    font-size: 15px;
-    animation: fall linear infinite;
+  position: absolute;
+  font-size: 15px;
+  animation: fall linear infinite;
 }
 @keyframes fall {
-    0% {
-        transform: translateY(-100px) rotate(0deg);
-        opacity: 1;
-    }
-    100% {
-        transform: translateY(100vh) rotate(360deg);
-        opacity: 0;
-    }
+  0% {
+      transform: translateY(-100px) rotate(0deg);
+      opacity: 1;
+  }
+  100% {
+      transform: translateY(100vh) rotate(360deg);
+      opacity: 0;
+  }
 }
 .dialog {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    top: 0; /* Full height */
-    background-color: #1c1c1e;
-    padding: 3rem; /* Lebih besar */
-    border-top-left-radius: 20px;
-    border-top-right-radius: 20px;
-    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.5);
-    z-index: 30; /* Lebih tinggi dari bilah navigasi */
-    text-align: center;
-    transform: translateY(100%);
-    transition: transform 0.3s ease-in-out;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  top: 0; /* Full height */
+  background-color: #000;
+  padding: 3rem;
+  z-index: 30; /* Lebih tinggi dari bilah navigasi */
+  text-align: center;
+  transform: translateY(100%);
+  transition: transform 0.3s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 .dialog.show {
-    transform: translateY(0);
+  transform: translateY(0);
 }
 .dialog h2 {
-    color: #ffffff;
-    font-family: 'Afacad Flux', sans-serif;
-    margin-bottom: 1.5rem; /* Lebih besar */
-    font-size: 1.5rem; /* Lebih besar */
+  color: #ffffff;
+  font-family: 'Afacad Flux', sans-serif;
+  margin-bottom: 1.5rem; /* Lebih besar */
+  font-size: 1.5rem; /* Lebih besar */
 }
 .dialog p {
-    color: #b0b0b0;
-    font-family: 'Afacad Flux', sans-serif;
-    margin-bottom: 2rem; /* Lebih besar */
-    font-size: 1.25rem; /* Lebih besar */
+  color: #b0b0b0;
+  font-family: 'Afacad Flux', sans-serif;
+  margin-bottom: 2rem; /* Lebih besar */
+  font-size: 1.25rem; /* Lebih besar */
 }
 .dialog button {
-    background-color: #00BFFF;
-    color: #ffffff;
-    padding: 0.75rem 1.5rem; /* Lebih besar */
-    border-radius: 50px;
-    font-family: 'Afacad Flux', sans-serif;
-    cursor: pointer;
-    font-size: 1rem; /* Lebih besar */
+  background-color: #00BFFF;
+  color: #ffffff;
+  padding: 0.75rem 1.5rem; /* Lebih besar */
+  border-radius: 50px;
+  font-family: 'Afacad Flux', sans-serif;
+  cursor: pointer;
+  font-size: 1rem; /* Lebih besar */
 }
