@@ -103,17 +103,17 @@ startFarmingButton.addEventListener('click', () => {
       startFarmingButton.innerText = `Farming: ${hours}h ${minutes}m ${seconds}s`;
       if (timeLeft <= 0) {
         clearInterval(countdownInterval);
-        startFarmingButton.innerText = 'Claim 1000 ';
+        startFarmingButton.innerText = 'Claim 1000 🌸';
         startFarmingButton.style.backgroundColor = '#032B44'; // change button color to blue
       }
     }, 1000); // update every 1 second
-  } else if (startFarmingButton.innerText === 'Claim 1000 ') {
+  } else if (startFarmingButton.innerText === 'Claim 1000 🌸') {
     const userID = getUserIDFromUrl();
     update(ref(database, 'users/' + userID), {
       coin: coinValue + 1000
     }).then(() => {
       coinValue += 1000;
-      document.getElementById('coinCount').textContent = ' ' + coinValue.toLocaleString();
+      document.getElementById('coinCount').textContent = '🌸 ' + coinValue.toLocaleString();
       startFarmingButton.innerText = 'Start Farming';
       startFarmingButton.style.backgroundColor = ''; // reset button color
     });
@@ -134,7 +134,7 @@ get(ref(database, 'farmingData/' + userID)).then((snapshot) => {
       startFarmingButton.innerText = `Farming: ${hours}h ${minutes}m ${seconds}s`;
       if (timeLeft <= 0) {
         clearInterval(countdownInterval);
-        startFarmingButton.innerText = 'Claim 1000 ';
+        startFarmingButton.innerText = 'Claim 1000 🌸';
         startFarmingButton.style.backgroundColor = '#032B44'; // change button color to blue
       }
     }, 1000); // update every 1 second
