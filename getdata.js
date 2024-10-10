@@ -23,6 +23,6 @@ function getUserIDFromUrl() {
 document.addEventListener('DOMContentLoaded', () => {
     const username = getUsernameFromUrl();
     if (username) {
-         document.getElementById('userName').innerText = username;
+         document.getElementById('userName').innerText = "@" + username;
     }
 });
