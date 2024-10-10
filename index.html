@@ -5,14 +5,16 @@
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
     <title>RZ COIN</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Afacad+Flux:wght@100..1000&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-
-</head>
-
+    <!-- Include Firebase JS -->
+    <script src="getdata.js"></script>    
+    <script type="module" src="firebase.js"></script>
+      <!-- Include your script.js -->
+      <script src="script.js"></script>
 <body>
     <!-- New User Dialog -->
     <div id="newUserDialog" class="dialog">
@@ -20,11 +22,11 @@
         <p>Claim your 1000 🌸 now!</p>
         <button id="claimSakuraButton" onclick="claimSakura()">Claim</button>
     </div>
-
-    <div id="sakuraContainer"></div>
+    
     <div class="flex flex-col items-center p-4 space-y-4 mb-24">
         <!-- Home Section -->
         <div id="homeSection" class="w-full">
+            <div id="sakuraContainer"></div>
             <div class="header">
                 <div class="flex items-center">
                     <div class="profile-image">
@@ -35,8 +37,9 @@
                         <div id="userName" class="userName">rzcoin</div>
                     </div>
                 </div>
-                <button style="font-family: 'Afacad Flux', sans-serif;"
-                    class="bg-[#282828] text-white rounded-full px-4 py-2 text-base">Open</button>
+                <button class="rankbut">
+                    <i class="rank-icon"></i> Rank
+                  </button>
             </div>
             <div class="game-section">
                 <img alt="Drop game image" class="w-28 h-28"
@@ -48,105 +51,105 @@
             <!-- Task 1 -->
             <div class="task">
                 <div class="flex items-center space-x-2 task-info">
-                    <i class="fas fa-times text-gray-400"></i>
-                    <div class="task-details">
-                        <div class="task-title">Follow RZ COIN Twitter</div>
-                        <div class="task-reward">Reward: <span class="text-white">+300</span> 🌸 <span
-                                class="text-white">0.1</span> <i class="fas fa-info-circle"></i></div>
-                    </div>
+                  <i class="fas fa-times text-gray-400"></i>
+                  <div class="task-details">
+                    <div class="task-title">Follow RZ COIN Twitter</div>
+                    <div class="task-reward">Reward: <span class="text-white">+300</span> 🌸 <span
+                          class="text-white">0.1</span> <i class="fas fa-info-circle"></i></div>
+                  </div>
                 </div>
-                <button class="bg-[#282828] text-white px-4 py-1 rounded-lg" onclick="goToTask(this, 300)">Go</button>
-            </div>
-            <!-- Task 2 -->
-            <div class="task">
-                <div class="flex items-center space-x-2 task-info">
-                    <i class="fas fa-paper-plane text-gray-400"></i>
-                    <div class="task-details">
-                        <div class="task-title">Story time with $RZ!</div>
-                        <div class="task-reward">Reward: <span class="text-white">+2,000</span> 🌸 <span
-                                class="text-white">0.1</span> <i class="fas fa-info-circle"></i></div>
-                    </div>
-                </div>
-                <button class="bg-[#282828] text-white px-4 py-1 rounded-lg" onclick="goToTask(this, 2000)">Go</button>
-            </div>
-            <!-- Task 3 -->
-            <div class="task">
-                <div class="flex items-center space-x-2 task-info">
-                    <i class="fas fa-times text-gray-400"></i>
-                    <div class="task-details">
-                        <div class="task-title">Check Bitget's Article about RZ COIN</div>
-                        <div class="task-reward">Reward: <span class="text-white">+300</span> 🌸</div>
-                    </div>
-                </div>
-                <button class="bg-[#282828] text-white px-4 py-1 rounded-lg" onclick="goToTask(this, 300)">Go</button>
-            </div>
-            <!-- Task 4 -->
-            <div class="task">
-                <div class="flex items-center space-x-2 task-info">
-                    <i class="fab fa-tiktok text-gray-400"></i>
-                    <div class="task-details">
-                        <div class="task-title">Like and repost TikTok video</div>
-                        <div class="task-reward">Reward: <span class="text-white">+300</span> 🌸</div>
-                    </div>
-                </div>
-                <button class="bg-[#282828] text-white px-4 py-1 rounded-lg" onclick="goToTask(this, 300)">Go</button>
-            </div>
-            <!-- Task 5 -->
-            <div class="task">
-                <div class="flex items-center space-x-2 task-info">
-                    <i class="fab fa-tiktok text-gray-400"></i>
-                    <div class="task-details">
-                        <div class="task-title">Follow RZ COIN TikTok</div>
-                        <div class="task-reward">Reward: <span class="text-white">+300</span> 🌸</div>
-                    </div>
-                </div>
-                <button class="bg-[#282828] text-white px-4 py-1 rounded-lg" onclick="goToTask(this, 300)">Go</button>
-            </div>
-            <!-- Task 6 -->
-            <div class="task">
-                <div class="flex items-center space-x-2 task-info">
-                    <i class="fas fa-times text-gray-400"></i>
-                    <div class="task-details">
-                        <div class="task-title">RZ COIN X Bitget: Giveaway $1000 in $TON</div>
-                        <div class="task-reward">Reward: <span class="text-white">+300</span> 🌸</div>
-                    </div>
-                </div>
-                <button class="bg-[#282828] text-white px-4 py-1 rounded-lg" onclick="goToTask(this, 300)">Go</button>
-            </div>
-            <!-- Task 7 -->
-            <div class="task">
-                <div class="flex items-center space-x-2 task-info">
-                    <i class="fas fa-times text-gray-400"></i>
-                    <div class="task-details">
-                        <div class="task-title">RZ COIN X OKX Wallet: OKX Connect Integration</div>
-                        <div class="task-reward">Reward: <span class="text-white">+300</span> 🌸</div>
-                    </div>
-                </div>
-                <button class="bg-[#282828] text-white px-4 py-1 rounded-lg" onclick="goToTask(this, 300)">Go</button>
-            </div>
-            <!-- Task 8 -->
-            <div class="task">
-                <div class="flex items-center space-x-2 task-info">
-                    <i class="fas fa-gamepad text-gray-400"></i>
-                    <div class="task-details">
-                        <div class="task-title">Play Lucky Number</div>
-                        <div class="task-reward">Reward: <span class="text-white">+20,000</span> 🌸</div>
-                    </div>
-                </div>
-                <button class="bg-[#282828] text-white px-4 py-1 rounded-lg" onclick="goToTask(this, 20000)">Go</button>
-            </div>
-            <!-- Task 9 -->
-            <div class="task">
-                <div class="flex items-center space-x-2 task-info">
-                    <i class="fas fa-gamepad text-gray-400"></i>
-                    <div class="task-details">
-                        <div class="task-title">Play Lucky Scratch</div>
-                        <div class="task-reward">Reward: <span class="text-white">+20,000</span> 🌸</div>
-                    </div>
-                </div>
-                <button class="bg-[#282828] text-white px-4 py-1 rounded-lg" onclick="goToTask(this, 20000)">Go</button>
-            </div>
-        </div>
+                <button id="taskButton" class="bg-[#282828] text-white px-4 py-1 rounded-lg" onclick="goToTask(this, 300)">Go</button> <!-- Add the claimReward function call and the reward amount -->
+              </div>
+              <!-- Task 2 -->
+              <div class="task">
+                  <div class="flex items-center space-x-2 task-info">
+                      <i class="fas fa-paper-plane text-gray-400"></i>
+                      <div class="task-details">
+                          <div class="task-title">Story time with $RZ!</div>
+                          <div class="task-reward">Reward: <span class="text-white">+2,000</span> 🌸 <span
+                                  class="text-white">0.1</span> <i class="fas fa-info-circle"></i></div>
+                      </div>
+                  </div>
+                  <button class="bg-[#282828] text-white px-4 py-1 rounded-lg" onclick="goToTask(this, 2000)">Go</button>
+              </div>
+              <!-- Task 3 -->
+              <div class="task">
+                  <div class="flex items-center space-x-2 task-info">
+                      <i class="fas fa-times text-gray-400"></i>
+                      <div class="task-details">
+                          <div class="task-title">Check Bitget's Article about RZ COIN</div>
+                          <div class="task-reward">Reward: <span class="text-white">+300</span> 🌸</div>
+                      </div>
+                  </div>
+                  <button class="bg-[#282828] text-white px-4 py-1 rounded-lg" onclick="goToTask(this, 300)">Go</button>
+              </div>
+              <!-- Task 4 -->
+              <div class="task">
+                  <div class="flex items-center space-x-2 task-info">
+                      <i class="fab fa-tiktok text-gray-400"></i>
+                      <div class="task-details">
+                          <div class="task-title">Like and repost TikTok video</div>
+                          <div class="task-reward">Reward: <span class="text-white">+300</span> 🌸</div>
+                      </div>
+                  </div>
+                  <button class="bg-[#282828] text-white px-4 py-1 rounded-lg" onclick="goToTask(this, 300)">Go</button>
+              </div>
+              <!-- Task 5 -->
+              <div class="task">
+                  <div class="flex items-center space-x-2 task-info">
+                      <i class="fab fa-tiktok text-gray-400"></i>
+                      <div class="task-details">
+                          <div class="task-title">Follow RZ COIN TikTok</div>
+                          <div class="task-reward">Reward: <span class="text-white">+300</span> 🌸</div>
+                      </div>
+                  </div>
+                  <button class="bg-[#282828] text-white px-4 py-1 rounded-lg" onclick="goToTask(this, 300)">Go</button>
+              </div>
+              <!-- Task 6 -->
+              <div class="task">
+                  <div class="flex items-center space-x-2 task-info">
+                      <i class="fas fa-times text-gray-400"></i>
+                      <div class="task-details">
+                          <div class="task-title">RZ COIN X Bitget: Giveaway $1000 in $TON</div>
+                          <div class="task-reward">Reward: <span class="text-white">+300</span> 🌸</div>
+                      </div>
+                  </div>
+                  <button class="bg-[#282828] text-white px-4 py-1 rounded-lg" onclick="goToTask(this, 300)">Go</button>
+              </div>
+              <!-- Task 7 -->
+              <div class="task">
+                  <div class="flex items-center space-x-2 task-info">
+                      <i class="fas fa-times text-gray-400"></i>
+                      <div class="task-details">
+                          <div class="task-title">RZ COIN X OKX Wallet: OKX Connect Integration</div>
+                          <div class="task-reward">Reward: <span class="text-white">+300</span> 🌸</div>
+                      </div>
+                  </div>
+                  <button class="bg-[#282828] text-white px-4 py-1 rounded-lg" onclick="goToTask(this, 300)">Go</button>
+              </div>
+              <!-- Task 8 -->
+              <div class="task">
+                  <div class="flex items-center space-x-2 task-info">
+                      <i class="fas fa-gamepad text-gray-400"></i>
+                      <div class="task-details">
+                          <div class="task-title">Play Lucky Number</div>
+                          <div class="task-reward">Reward: <span class="text-white">+20,000</span> 🌸</div>
+                      </div>
+                  </div>
+                  <button class="bg-[#282828] text-white px-4 py-1 rounded-lg" onclick="goToTask(this, 20000)">Go</button>
+              </div>
+              <!-- Task 9 -->
+              <div class="task">
+                  <div class="flex items-center space-x-2 task-info">
+                      <i class="fas fa-gamepad text-gray-400"></i>
+                      <div class="task-details">
+                          <div class="task-title">Play Lucky Scratch</div>
+                          <div class="task-reward">Reward: <span class="text-white">+20,000</span> 🌸</div>
+                      </div>
+                  </div>
+                  <button class="bg-[#282828] text-white px-4 py-1 rounded-lg" onclick="goToTask(this, 20000)">Go</button>
+              </div>
+          </div>
     </div>
     <!-- Frens Section -->
     <div id="frensSection" class="w-full" style="display: none;">
@@ -157,35 +160,37 @@
         <div class="text-center text-2xl">Wallet Section</div>
     </div>
     </div>
+    
     <!-- Floating Start/Stop Farming Button -->
     <div id="farmingButton" class="fixed bottom-24 left-0 right-0 px-4 z-10">
-        <button onclick="startFarming()" class="farming-button">
+        <button id="startFarming" class="farming-button">
             <i class="fas fa-bolt mr-2"></i>
             <span>Start farming</span>
         </button>
     </div>
+    <!-- Rank Section -->
+    <div id="rankSection" style="display: none;">
+        <!-- Your rank section content here -->
+      </div>
     <!-- Floating Navigation Bar -->
     <div class="navigation-bar">
-        <a href="#" class="navigation-item" onclick="showSection('homeSection', 'homeIcon')">
+        <a onclick="showSection('homeSection', 'homeIcon')" class="navigation-item">
             <i id="homeIcon" class="fas fa-home text-white"></i>
             <div class="text-white">Home</div>
         </a>
-        <a href="#" class="navigation-item" onclick="showSection('earnSection', 'earnIcon')">
+        <a onclick="showSection('earnSection', 'earnIcon')" class="navigation-item">
             <i id="earnIcon" class="fas fa-coins text-gray-400"></i>
             <div class="text-gray-400">Earn</div>
         </a>
-        <a href="#" class="navigation-item" onclick="showSection('frensSection', 'frensIcon')">
+        <a onclick="showSection('frensSection', 'frensIcon')" class="navigation-item">
             <i id="frensIcon" class="fas fa-users text-gray-400"></i>
             <div class="text-gray-400">Frens</div>
         </a>
-        <a href="#" class="navigation-item" onclick="showSection('walletSection', 'walletIcon')">
+        <a onclick="showSection('walletSection', 'walletIcon')" class="navigation-item">
             <i id="walletIcon" class="fas fa-wallet text-gray-400"></i>
             <div class="text-gray-400">Wallet</div>
         </a>
     </div>
-        <script src="getdata.js"></script>
-    <script type="module" src="firebase.js"></script>
-        <script src="script.js"></script>
 </body>
 
 </html>
