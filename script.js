@@ -32,66 +32,6 @@ function showSection(sectionId, iconId) {
     }
 }
 
-// Function to start farming
-function startFarming() {
-  const farmingButton = document.getElementById('farmingButton');
-  const farmingButtonIcon = farmingButton.querySelector('i');
-  const farmingButtonSpan = farmingButton.querySelector('span');
-  // Check if farming is currently running
-  if (farmingButtonIcon.classList.contains('fa-stop-circle')) {
-    // Stop farming
-    farmingButtonIcon.classList.remove('fa-stop-circle');
-    farmingButtonIcon.classList.add('fa-bolt');
-    farmingButtonSpan.textContent = 'Start farming';
-    clearInterval(farmingInterval); // Stop the interval
-  } else {
-    // Start farming
-    farmingButtonIcon.classList.remove('fa-bolt');
-    farmingButtonIcon.classList.add('fa-stop-circle');
-    farmingButtonSpan.textContent = 'Stop farming';
-    farmingInterval = setInterval(updateCoinCount, 1000); // Update every second
-  }
-}
-// Function to update the coin count
-async function updateCoinCount() {
-  const coinCount = document.getElementById('coinCount');
-  let currentCoins = parseInt(coinCount.textContent.replace('🌸 ', ''), 10); // Get current coins
-  // Fetch the latest coin value from Firebase
-  try {
-    coinValue = await getCoinValue(); // Await the promise to get the value
-    // Update the coin count if farming is active
-    if (document.getElementById('farmingButton').querySelector('i').classList.contains('fa-stop-circle')) {
-      currentCoins += coinValue; // Update currentCoins directly
-      coinCount.textContent = '🌸 ' + currentCoins; // Update UI
-      // Update the coin value in Firebase
-      const userID = getUserIDFromUrl();
-      if (userID) {
-        set(ref(database, 'users/' + userID), {
-          userid: userID,
-          coin: currentCoins // Update coin in Firebase
-        });
-      }
-    }
-  } catch (error) {
-    console.error('Error updating coin count:', error);
-  }
-}
-
-
-function goToTask(button, reward) {
-    window.open('https://rulsz.eu.org', '_blank');
-    button.innerText = 'Claim';
-    button.classList.add('claim');
-    button.onclick = function() {
-        claimReward(reward);
-        button.closest('.task').style.display = 'none';
-    };
-}
-
-function claimReward(reward) {
-    coins += reward;
-    document.getElementById('coinCount').innerText = `🌸 ${coins.toLocaleString('de-DE')}`;
-}
 
 function createSakuraEmoji() {
     const sakuraContainer = document.getElementById('sakuraContainer');
@@ -107,3 +47,81 @@ function createSakuraEmoji() {
     }, 10000); // Durasi lebih lama
 }
 setInterval(createSakuraEmoji, 1500); // Interval lebih lama
+
+const database = getDatabase();
+
+let coinValue = 0;
+
+// Add event listener for the "newUserDialog"
+document.addEventListener('DOMContentLoaded', () => {
+  const userID = getUserIDFromUrl();
+  if (userID) {
+
+    // Check if user ID exists in the database
+    get(ref(database, 'users/' + userID)).then((snapshot) => {
+      if (snapshot.exists()) {
+        // User ID exists, retrieve the coin value
+        coinValue = snapshot.val().coin;
+        document.getElementById('coinCount').textContent = '🌸 ' + coinValue;
+
+        // Check if the welcome dialog has been shown
+        if (!snapshot.val().welcomeShown) {
+          // Show the welcome dialog
+          document.getElementById('newUserDialog').classList.add('show');
+
+          // Add the click listener to the button after it's loaded
+          document.getElementById('claimSakuraButton').addEventListener('click', claimSakura);
+        }
+
+      } else {
+        // User ID does not exist, set the initial value
+        set(ref(database, 'users/' + userID), {
+          userid: userID,
+          coin: 0,
+          welcomeShown: false
+        }).then(() => {
+          // Update the coin display in the UI
+          document.getElementById('coinCount').textContent = '🌸 0';
+        }).catch((error) => {
+          alert(error);
+        });
+      }
+    }).catch((error) => {
+      alert(error);
+    });
+  }
+});
+
+// Create a function to return the coinValue
+function getCoinValue() {
+  return coinValue; 
+}
+
+// Function to update the coin value and hide the dialog
+function claimSakura() {
+  const userID = getUserIDFromUrl();
+  if (userID) {
+    update(ref(database, 'users/' + userID), {
+      coin: coinValue + 1000,
+      welcomeShown: true
+    }).then(() => {
+      // Update the coin display in the UI
+      coinValue += 1000;
+      document.getElementById('coinCount').textContent = '🌸 ' + coinValue;
+      document.getElementById('newUserDialog').classList.remove('show');
+    }).catch((error) => {
+      alert(error);
+    });
+  }
+}
+
+document.getElementById('rankbut').addEventListener('click', function() {
+  // Sembunyikan section lain
+  document.getElementById('homeSection').style.display = 'none';
+  document.getElementById('earnSection').style.display = 'none';
+  document.getElementById('frensSection').style.display = 'none';
+  document.getElementById('walletSection').style.display = 'none';
+
+  // Tampilkan rankSection
+  document.getElementById('rankSection').style.display = 'block';
+});
