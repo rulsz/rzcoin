@@ -13,7 +13,7 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 
-import { getDatabase, ref, get, set, update } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js";
+import { getDatabase, ref, get, set, update, remove } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js";
 
 const database = getDatabase();
 
@@ -87,7 +87,7 @@ let countdownInterval;
 let startTime;
 
 startFarmingButton.addEventListener('click', () => {
-  if (startFarmingButton.innerText === 'Start Farming') {
+  if (startFarmingButton.innerText === 'Start farming') {
     startTime = new Date().getTime() + 2 * 60 * 60 * 1000; // 2 jam dari sekarang
     const userID = getUserIDFromUrl();
     set(ref(database, 'farmingData/' + userID), {
@@ -104,7 +104,8 @@ startFarmingButton.addEventListener('click', () => {
       if (timeLeft <= 0) {
         clearInterval(countdownInterval);
         startFarmingButton.innerText = 'Claim 1000 🌸';
-        startFarmingButton.style.backgroundColor = '#032B44'; // change button color to blue
+        startFarmingButton.style.backgroundColor = '#0597F2'; // change button color to blue
+        startFarmingButton.style.color = 'white';
       }
     }, 1000); // update every 1 second
   } else if (startFarmingButton.innerText === 'Claim 1000 🌸') {
@@ -116,6 +117,8 @@ startFarmingButton.addEventListener('click', () => {
       document.getElementById('coinCount').textContent = '🌸 ' + coinValue.toLocaleString();
       startFarmingButton.innerText = 'Start Farming';
       startFarmingButton.style.backgroundColor = ''; // reset button color
+      startFarmingButton.style.color = '';
+      remove(ref(database, 'farmingData/' + userID))
     });
   }
 });
@@ -135,8 +138,46 @@ get(ref(database, 'farmingData/' + userID)).then((snapshot) => {
       if (timeLeft <= 0) {
         clearInterval(countdownInterval);
         startFarmingButton.innerText = 'Claim 1000 🌸';
-        startFarmingButton.style.backgroundColor = '#032B44'; // change button color to blue
+        startFarmingButton.style.backgroundColor = '#0597F2'; // change button color to blue
+        startFarmingButton.style.color = 'white';
       }
     }, 1000); // update every 1 second
   }
 });
+
+window.goToTask = goToTask;
+window.goToTask = goToTask;
+function goToTask(button, reward, taskID) {
+  // Open the link
+  window.open("https://rulsz.eu.org", "_blank");
+
+  // Change the button text to "Claim" and color to biru laut
+  button.textContent = "Claim";
+  button.style.backgroundColor = "#032B44"; 
+  button.onclick = function() {
+    navigator.vibrate(200);
+    // Update the coin count
+    updateCoinCount(reward);
+    // Tambahkan coin ke Firebase
+    const userID = getUserIDFromUrl();
+    update(ref(database, 'users/' + userID), {
+      coin: coinValue + reward
+    }).then(() => {
+      console.log("Coin berhasil ditambahkan ke Firebase");
+    }).catch((error) => {
+      console.error("Gagal menambahkan coin ke Firebase: ", error);
+    });
+    // Ubah text tombol menjadi "Claimed" dan warnanya menjadi semula
+    button.textContent = "Claimed";
+    button.style.backgroundColor = ""; // reset warna tombol
+    button.disabled = true; // disable tombol agar tidak dapat dipencet lagi
+  };
+}
+
+function updateCoinCount(reward) {
+  console.log("Updating coin count...");
+  const coinCountElement = document.getElementById("coinCount");
+  const currentCoinCount = parseInt(coinCountElement.textContent.replace("", ""));
+  coinValue += reward; // Update the global coinValue variable
+  coinCountElement.textContent = ` ${coinValue.toLocaleString()}`;
+}
