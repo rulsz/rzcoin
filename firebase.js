@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (snapshot.exists()) {
         // User ID exists, retrieve the coin value
         coinValue = snapshot.val().coin;
-        document.getElementById('coinCount').textContent = '🌸 ' + coinValue;
+        document.getElementById('coinCount').textContent = '🌸 ' + coinValue.toLocaleString();;
 
         // Check if the welcome dialog has been shown
         if (!snapshot.val().welcomeShown) {
@@ -81,3 +81,62 @@ function claimSakura() {
     });
   }
 }
+
+const startFarmingButton = document.getElementById('startFarming');
+let countdownInterval;
+let startTime;
+
+startFarmingButton.addEventListener('click', () => {
+  if (startFarmingButton.innerText === 'Start Farming') {
+    startTime = new Date().getTime() + 2 * 60 * 60 * 1000; // 2 jam dari sekarang
+    const userID = getUserIDFromUrl();
+    set(ref(database, 'farmingData/' + userID), {
+      startTime: startTime
+    });
+
+    countdownInterval = setInterval(() => {
+      const currentTime = new Date().getTime();
+      const timeLeft = startTime - currentTime;
+      const hours = Math.floor(timeLeft / (60 * 60 * 1000));
+      const minutes = Math.floor((timeLeft % (60 * 60 * 1000)) / (60 * 1000));
+      const seconds = Math.floor((timeLeft % (60 * 1000)) / 1000);
+      startFarmingButton.innerText = `Farming: ${hours}h ${minutes}m ${seconds}s`;
+      if (timeLeft <= 0) {
+        clearInterval(countdownInterval);
+        startFarmingButton.innerText = 'Claim 1000 ';
+        startFarmingButton.style.backgroundColor = '#032B44'; // change button color to blue
+      }
+    }, 1000); // update every 1 second
+  } else if (startFarmingButton.innerText === 'Claim 1000 ') {
+    const userID = getUserIDFromUrl();
+    update(ref(database, 'users/' + userID), {
+      coin: coinValue + 1000
+    }).then(() => {
+      coinValue += 1000;
+      document.getElementById('coinCount').textContent = ' ' + coinValue.toLocaleString();
+      startFarmingButton.innerText = 'Start Farming';
+      startFarmingButton.style.backgroundColor = ''; // reset button color
+    });
+  }
+});
+
+// check if startTime is already set in Firebase
+const userID = getUserIDFromUrl();
+get(ref(database, 'farmingData/' + userID)).then((snapshot) => {
+  if (snapshot.exists()) {
+    startTime = snapshot.val().startTime;
+    countdownInterval = setInterval(() => {
+      const currentTime = new Date().getTime();
+      const timeLeft = startTime - currentTime;
+      const hours = Math.floor(timeLeft / (60 * 60 * 1000));
+      const minutes = Math.floor((timeLeft % (60 * 60 * 1000)) / (60 * 1000));
+      const seconds = Math.floor((timeLeft % (60 * 1000)) / 1000);
+      startFarmingButton.innerText = `Farming: ${hours}h ${minutes}m ${seconds}s`;
+      if (timeLeft <= 0) {
+        clearInterval(countdownInterval);
+        startFarmingButton.innerText = 'Claim 1000 ';
+        startFarmingButton.style.backgroundColor = '#032B44'; // change button color to blue
+      }
+    }, 1000); // update every 1 second
+  }
+});
