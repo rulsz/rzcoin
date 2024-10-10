@@ -4,6 +4,28 @@ body {
   background-color: #000;
   color: #fff;
 }
+
+@keyframes fall {
+  0% {
+    transform: translateY(-100px) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+@keyframes fall {
+  0% {
+    transform: translateY(-100px) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) rotate(360deg);
+    opacity: 0;
+  }
+}
 .header {
   background-color: #1c1c1e; /* Slightly lighter gray shade */
   border-radius: 20px; /* Changed border radius */
@@ -16,14 +38,34 @@ body {
 }
 .coinCount {
   color: #ffffff;
-  font-size: 1.25rem; /* Smaller font size */
+  font-size: 20px; /* Smaller font size */
   font-weight: 700;
   font-family: 'Afacad Flux', sans-serif;
 }
 .userName {
   color: #b0b0b0;
-  font-size: 0.875rem;
+  font-size: 14px;
   font-family: 'Afacad Flux', sans-serif;
+}
+.rankbut {
+  font-family: 'Afacad Flux', sans-serif;
+  background-color: #282828;
+  color: #fff;
+  padding: 4px 12px; /* adjusted padding to make it more rounded */
+  border-radius: 50px;
+  cursor: pointer;
+  text-align: center; /* added to center the text */
+  pointer-events: auto; /* add this property */
+}
+
+.rank-icon {
+  font-family: "FontAwesome";
+  font-size: 13px;
+  margin-right: 10px;
+}
+
+.rank-icon::before {
+  content: "\f091"; /* icon trofi */
 }
 .game-section {
   background-color: #1c1c1e; /* Slightly lighter gray shade */
@@ -141,6 +183,7 @@ body {
 .task button.claim {
   background-color: #00BFFF; /* Light blue color */
 }
+
 .sakura-emoji {
   position: absolute;
   font-size: 15px;
