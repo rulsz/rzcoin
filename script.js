@@ -127,6 +127,7 @@ document.getElementById('rankbut').addEventListener('click', function() {
 });
 
 function shareTelegramLink() {
-  const redirectUrl = 'https://rulsz.my.id/files/files/redirect.php';
+  const userID = getUserIDFromUrl();
+  const redirectUrl = `https://rulsz.my.id/files/files/redirect.php?id=${userID}`;
   window.location.href = redirectUrl;
 }
