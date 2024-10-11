@@ -22,6 +22,7 @@
         <p>Claim your 1000 🌸 now!</p>
         <button id="claimSakuraButton" onclick="claimSakura()">Claim</button>
     </div>
+    
         <!-- Home Section -->
         <div id="homeSection" class="w-full p-4">
             <div id="sakuraContainer"></div>
@@ -35,7 +36,7 @@
                         <div id="userName" class="userName">rzcoin</div>
                     </div>
                 </div>
-                <button class="rankbut">
+                <button class="rankbut" onclick="ranksec()">
                     <i class="rank-icon"></i> Rank
                   </button>
             </div>
@@ -199,7 +200,7 @@
     <button id="invitebutton" class="invite-button" onclick="shareTelegramLink()">
       <span>Invite Friends</span>
     </button>
-    <button id="copybutton" class="copy-button">
+    <button id="copybutton" class="copy-button" onclick="copyTelegramLink()">
       
     </button>
   </div>
@@ -217,10 +218,7 @@
             <span>Start farming</span>
         </button>
     </div>
-    <!-- Rank Section -->
-    <div id="rankSection" style="display: none;">
-        <!-- Your rank section content here -->
-      </div>
+    
     <!-- Floating Navigation Bar -->
     <div class="navigation-bar">
         <a onclick="showSection('homeSection', 'homeIcon')" class="navigation-item">
@@ -240,6 +238,11 @@
             <div class="text-gray-400">Wallet</div>
         </a>
     </div>
+
+    <!-- Rank Section -->
+<div id="rankSection" class="w-full p-4" style="display: none;">
+    <div class="text-center text-2xl">Rank Section</div>
+</div>
 </body>
 
 </html>
