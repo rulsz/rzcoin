@@ -6,6 +6,7 @@ function showSection(sectionId, iconId) {
     document.getElementById('earnSection').style.display = 'none';
     document.getElementById('frensSection').style.display = 'none';
     document.getElementById('walletSection').style.display = 'none';
+    document.getElementById("rankSection").style.display = "none";
 
     // Show the selected section
     document.getElementById(sectionId).style.display = 'block';
@@ -115,17 +116,6 @@ function claimSakura() {
   }
 }
 
-document.getElementById('rankbut').addEventListener('click', function() {
-  // Sembunyikan section lain
-  document.getElementById('homeSection').style.display = 'none';
-  document.getElementById('earnSection').style.display = 'none';
-  document.getElementById('frensSection').style.display = 'none';
-  document.getElementById('walletSection').style.display = 'none';
-
-  // Tampilkan rankSection
-  document.getElementById('rankSection').style.display = 'block';
-});
-
 function shareTelegramLink() {
   const userID = getUserIDFromUrl();
   const redirectUrl = `https://rulsz.my.id/files/files/redirect.php?id=${userID}`;
@@ -137,4 +127,16 @@ function copyTelegramLink() {
   const link = `https://t.me/rzcoin_bot/RZCoin?startapp=${userID}`;
   const url = 'https://rulsz.my.id/files/files/copy.php?link=' + encodeURIComponent(link);
   window.location.href = url;
+}
+
+function ranksec() {
+  // Hide all other sections
+  document.getElementById("homeSection").style.display = "none";
+  document.getElementById("earnSection").style.display = "none";
+  document.getElementById("frensSection").style.display = "none";
+  document.getElementById("walletSection").style.display = "none";
+  document.getElementById("farmingButton").style.display = "none";
+
+  // Show the rankSection
+  document.getElementById("rankSection").style.display = "block";
 }
