@@ -23,6 +23,36 @@
         <button id="claimSakuraButton" onclick="claimSakura()">Claim</button>
     </div>
     
+<!-- Rank Section -->
+<div id="rankSection" class="w-full p-4" style="display: none; margin-bottom: 70px;">
+       
+          <!-- User Info -->
+          <div class="flex items-center justify-between bg-[#1c1c1e] p-4 rounded-lg mb-4">
+            <div class="flex items-center">
+              <img alt="User  avatar" class="w-12 h-12 rounded-full mr-4" height="50" src="https://rulsz.my.id/files/files/folder/logo.png" width="50"/>
+              <div>
+                <div id="myuser" class="text-lg font-bold">
+                  username
+                </div>
+                <div id="mycoin" class="text-gray-400">
+                  0 
+                </div>
+              </div>
+            </div>
+            <div id="myrank" class="text-lg font-bold">
+              #1
+            </div>
+          </div>
+          <!-- Get more DUCKS button -->
+          <div class="bg-yellow-600 text-center text-black font-bold py-2 rounded-lg mb-4">
+            + Get more 
+          </div>
+          <!-- Holders List -->
+          <div id="holdersList" class="holders-List">
+            
+        </div>
+</div>
+
         <!-- Home Section -->
         <div id="homeSection" class="w-full p-4">
             <div id="sakuraContainer"></div>
@@ -238,11 +268,7 @@
             <div class="text-gray-400">Wallet</div>
         </a>
     </div>
-
-    <!-- Rank Section -->
-<div id="rankSection" class="w-full p-4" style="display: none;">
-    <div class="text-center text-2xl">Rank Section</div>
-</div>
+    
 </body>
 
 </html>
