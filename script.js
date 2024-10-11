@@ -127,6 +127,6 @@ document.getElementById('rankbut').addEventListener('click', function() {
 });
 
 function shareTelegramLink() {
-  const telegramUrl = 'tg://msg_url?url=https://rulsz.eu.org&text=Join+now';
-  window.location.href = telegramUrl;
+  const shareUrl = 'https://t.me/share/url?url=https://rulsz.eu.org&text=Join+now';
+  window.open(shareUrl, '_blank');
 }
