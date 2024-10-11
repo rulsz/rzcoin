@@ -128,19 +128,6 @@ document.getElementById('rankbut').addEventListener('click', function() {
 
 function shareTelegramLink() {
   const telegramLink = 'https://t.me/rzcoin_bot/RZCoin?startapp=ref';
-  const textToShare = 'Join RZ Coin and start earning!';
-  
-  if (navigator.share) {
-    navigator.share({
-      title: 'RZ Coin',
-      text: textToShare,
-      url: telegramLink
-    })
-    .then(() => console.log('Shared successfully'))
-    .catch(error => console.error('Error sharing:', error));
-  } else {
-    // Fallback for older browsers
-    const telegramUrl = 'tg://msg_url?url=' + encodeURIComponent(telegramLink);
-    window.location.href = telegramUrl;
-  }
+  const telegramUrl = 'tg://msg_url?url=' + encodeURIComponent(telegramLink) + '&text=Join RZ Coin and start earning!';
+  window.location.href = telegramUrl;
 }
