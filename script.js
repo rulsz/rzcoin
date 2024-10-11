@@ -126,13 +126,21 @@ document.getElementById('rankbut').addEventListener('click', function() {
   document.getElementById('rankSection').style.display = 'block';
 });
 
-const copyButton = document.getElementById('copyButton'); // assume this is the button ID
-copyButton.addEventListener('click', () => {
-  const userID = getUserIDFromUrl();
-  const link = `https://t.me/rzcoin_bot/RZCoin?startapp=ref${userID}`;
-  navigator.clipboard.writeText(link).then(() => {
-    console.log('Link copied to clipboard!');
-  }).catch((error) => {
-    console.error('Error copying link to clipboard:', error);
-  });
-});
+function shareTelegramLink() {
+  const telegramLink = 'https://t.me/rzcoin_bot/RZCoin?startapp=ref';
+  const textToShare = 'Join RZ Coin and start earning!';
+  
+  // Check if the browser supports the Web Share API
+  if (navigator.share) {
+    navigator.share({
+      title: 'RZ Coin',
+      text: textToShare,
+      url: telegramLink
+    })
+    .then(() => console.log('Shared successfully'))
+    .catch(error => console.error('Error sharing:', error));
+  } else {
+    // Fallback to a simple window.open if the Web Share API is not supported
+    window.open(telegramLink, '_blank');
+  }
+}
