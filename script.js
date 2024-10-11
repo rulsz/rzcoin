@@ -125,3 +125,14 @@ document.getElementById('rankbut').addEventListener('click', function() {
   // Tampilkan rankSection
   document.getElementById('rankSection').style.display = 'block';
 });
+
+const copyButton = document.getElementById('copyButton'); // assume this is the button ID
+copyButton.addEventListener('click', () => {
+  const userID = getUserIDFromUrl();
+  const link = `https://t.me/rzcoin_bot/RZCoin?startapp=ref${userID}`;
+  navigator.clipboard.writeText(link).then(() => {
+    console.log('Link copied to clipboard!');
+  }).catch((error) => {
+    console.error('Error copying link to clipboard:', error);
+  });
+});
