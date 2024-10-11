@@ -138,6 +138,7 @@ function copyTelegramLink() {
   textarea.value = link;
   document.body.appendChild(textarea);
   textarea.select();
-  document.execCommand('copy');
-  document.body.removeChild(textarea);
+  navigator.clipboard.writeText(link).then(() => {
+    document.body.removeChild(textarea);
+  });
 }
