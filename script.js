@@ -130,7 +130,6 @@ function shareTelegramLink() {
   const telegramLink = 'https://t.me/rzcoin_bot/RZCoin?startapp=ref';
   const textToShare = 'Join RZ Coin and start earning!';
   
-  // Check if the browser supports the Web Share API
   if (navigator.share) {
     navigator.share({
       title: 'RZ Coin',
@@ -140,7 +139,8 @@ function shareTelegramLink() {
     .then(() => console.log('Shared successfully'))
     .catch(error => console.error('Error sharing:', error));
   } else {
-    // Fallback to a simple window.open if the Web Share API is not supported
-    window.open(telegramLink, '_blank');
+    // Fallback for older browsers
+    const telegramUrl = 'tg://msg_url?url=' + encodeURIComponent(telegramLink);
+    window.location.href = telegramUrl;
   }
 }
