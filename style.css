@@ -4,27 +4,13 @@ body {
   background-color: #000;
   color: #fff;
 }
-
-@keyframes fall {
-  0% {
-    transform: translateY(-100px) rotate(0deg);
-    opacity: 1;
-  }
-  100% {
-    transform: translateY(100vh) rotate(360deg);
-    opacity: 0;
-  }
-}
-
-@keyframes fall {
-  0% {
-    transform: translateY(-100px) rotate(0deg);
-    opacity: 1;
-  }
-  100% {
-    transform: translateY(100vh) rotate(360deg);
-    opacity: 0;
-  }
+.Section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+  gap: 1rem;
+  margin-bottom: 6rem;
 }
 .header {
   background-color: #1c1c1e; /* Slightly lighter gray shade */
@@ -69,7 +55,7 @@ body {
 }
 .game-section {
   background-color: #1c1c1e; /* Slightly lighter gray shade */
-  border-radius: 0.5rem;
+  border-radius: 1.2rem;
   padding: 1rem;
   width: 100%;
   display: flex;
@@ -239,4 +225,49 @@ body {
   font-family: 'Afacad Flux', sans-serif;
   cursor: pointer;
   font-size: 1rem; /* Lebih besar */
+}
+
+.frenss {
+  padding: 1rem; 
+  margin-bottom: 150px;
+  border-radius: 1rem; 
+  align-items: center;
+
+}
+
+.invite-button {
+  background-color: #ffffff;
+  color: #000000;
+  font-weight: 700;
+  border-radius: 9999px;
+  padding: 0.75rem;
+  width: calc(100% - 60px); /* adjust width to make room for the copy button */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  font-family: 'Afacad Flux', sans-serif;
+}
+
+.copy-button {
+  background-color: #ffffff;
+  color: #000000;
+  font-weight: 700;
+  border-radius: 9999px;
+  padding: 0.75rem;
+  width: 50px; /* set a fixed width for the copy button */
+  font-size: 1rem;
+  font-family: 'Afacad Flux', sans-serif;
+  margin-left: 10px; /* add some space between the two buttons */
+}
+
+.copy-button::before {
+  font-family: "FontAwesome";
+  content: "\f0c5"; /* copy icon */
+  font-size: 1rem;
+}
+
+/* Add this to keep the buttons on the same line */
+.invite-button, .copy-button {
+  float: left;
 }
