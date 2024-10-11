@@ -29,7 +29,8 @@ document.addEventListener('DOMContentLoaded', () => {
       if (snapshot.exists()) {
         // User ID exists, retrieve the coin value
         coinValue = snapshot.val().coin;
-        document.getElementById('coinCount').textContent = '🌸 ' + coinValue.toLocaleString();;
+        document.getElementById('coinCount').textContent = '🌸 ' + coinValue.toLocaleString();
+        document.getElementById('mycoin').textContent = '🌸 ' + coinValue.toLocaleString();
 
         // Check if the welcome dialog has been shown
         if (!snapshot.val().welcomeShown) {
@@ -187,3 +188,56 @@ function updateCoinCount(reward) {
   coinValue += reward; // Update the global coinValue variable
   coinCountElement.textContent = ` ${coinValue.toLocaleString()}`;
 }
+
+document.getElementById('myuser').textContent = getUsernameFromUrl();
+get(ref(database, 'users/')).then((snapshot) => {
+  const users = snapshot.val();
+  const sortedUsers = Object.keys(users).sort((a, b) => {
+    return users[b].coin - users[a].coin;
+  });
+
+  const currentUserId = getUserIDFromUrl();
+  let rank = 1;
+  let myRankValue = 0;
+
+  sortedUsers.forEach((key) => {
+    console.log(`Key: ${key}`); // Log each key
+    const user = users[key];
+    let medal = '';
+    switch (rank) {
+      case 1:
+        medal = '🥇';
+        break;
+      case 2:
+        medal = '🥈';
+        break;
+      case 3:
+        medal = '🥉';
+        break;
+      default:
+        medal = `#${rank}`;
+    }
+    const holderHTML = `
+      <div class="flex item center justify-between bg-[#1c1c1e] p-4 rounded-lg" style="margin-bottom: 15px;">
+        <div class="flex items-center">
+          <img alt="https://rulsz.my.id/files/files/folder/logo.png" class="w-12 h-12 rounded-full mr-4" height="50" src="https://rulsz.my.id/files/files/folder/logo.png" width="50"/>
+          <div>
+            <div class="text-lg font-bold">${user.userid}</div>
+            <div class="text-gray-400">${user.coin.toLocaleString()} 🌸</div>
+          </div>
+        </div>
+        
+        <div class="text-white-500 text-md">
+          ${medal} <!-- Display the ranking medal or number -->
+        </div>
+      </div>
+    `;
+    if (key === currentUserId) {
+      myRankValue = rank;
+    }
+    document.getElementById('holdersList').innerHTML += holderHTML;
+    rank++;
+  });
+
+  document.getElementById('myrank').textContent = `#${myRankValue}`;
+});
