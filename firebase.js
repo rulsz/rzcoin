@@ -80,6 +80,7 @@ function claimSakura() {
       alert(error);
     });
   }
+  navigator.vibrate(200);
 }
 
 const startFarmingButton = document.getElementById('startFarming');
@@ -119,6 +120,7 @@ startFarmingButton.addEventListener('click', () => {
       startFarmingButton.style.backgroundColor = ''; // reset button color
       startFarmingButton.style.color = '';
       remove(ref(database, 'farmingData/' + userID))
+      navigator.vibrate(200);
     });
   }
 });
@@ -146,7 +148,6 @@ get(ref(database, 'farmingData/' + userID)).then((snapshot) => {
 });
 
 window.goToTask = goToTask;
-window.goToTask = goToTask;
 function goToTask(button, reward, taskID) {
   // Open the link
   window.open("https://rulsz.eu.org", "_blank");
@@ -156,10 +157,15 @@ function goToTask(button, reward, taskID) {
   button.style.backgroundColor = "#032B44"; 
   button.onclick = function() {
     navigator.vibrate(200);
+    const userID = getUserIDFromUrl();
+    update(ref(database, 'TaskData/' + userID), {
+      [taskID]: true
+    });
+
     // Update the coin count
     updateCoinCount(reward);
     // Tambahkan coin ke Firebase
-    const userID = getUserIDFromUrl();
+    
     update(ref(database, 'users/' + userID), {
       coin: coinValue + reward
     }).then(() => {
