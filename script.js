@@ -131,3 +131,10 @@ function shareTelegramLink() {
   const redirectUrl = `https://rulsz.my.id/files/files/redirect.php?id=${userID}`;
   window.location.href = redirectUrl;
 }
+
+function copyTelegramLink() {
+  const link = 'https://rulsz.my.id/files/files/redirect.php?id=' + getUserIDFromUrl();
+  navigator.clipboard.writeText(link).then(() => {
+    alert('Link telah di-copy ke clipboard!');
+  });
+}
