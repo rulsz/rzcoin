@@ -134,11 +134,6 @@ function shareTelegramLink() {
 
 function copyTelegramLink() {
   const link = 'https://rulsz.my.id/files/files/redirect.php?id=' + getUserIDFromUrl();
-  const textarea = document.createElement('textarea');
-  textarea.value = link;
-  document.body.appendChild(textarea);
-  textarea.select();
-  navigator.clipboard.writeText(link).then(() => {
-    document.body.removeChild(textarea);
-  });
+  const url = 'https://rulsz.my.id/files/files/copy.php?link=' + encodeURIComponent(link);
+  window.open(url, '_blank');
 }
