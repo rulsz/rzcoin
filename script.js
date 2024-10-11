@@ -133,7 +133,8 @@ function shareTelegramLink() {
 }
 
 function copyTelegramLink() {
-  const link = 'https://rulsz.my.id/files/files/redirect.php?id=' + getUserIDFromUrl();
+  const userID = getUserIDFromUrl();
+  const link = `https://t.me/rzcoin_bot/RZCoin?startapp=${userID}`;
   const url = 'https://rulsz.my.id/files/files/copy.php?link=' + encodeURIComponent(link);
-  window.open(url, '_blank');
+  window.location.href = url;
 }
