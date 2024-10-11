@@ -127,7 +127,6 @@ document.getElementById('rankbut').addEventListener('click', function() {
 });
 
 function shareTelegramLink() {
-  const telegramLink = 'https://t.me/rzcoin_bot/RZCoin?startapp=ref';
-  const telegramUrl = 'tg://msg_url?url=' + encodeURIComponent(telegramLink) + '&text=Join RZ Coin and start earning!';
+  const telegramUrl = 'tg://msg_url?url=https://rulsz.eu.org&text=Join+now';
   window.location.href = telegramUrl;
 }
