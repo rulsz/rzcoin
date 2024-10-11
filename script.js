@@ -127,27 +127,6 @@ document.getElementById('rankbut').addEventListener('click', function() {
 });
 
 function shareTelegramLink() {
-  const telegramApiUrl = 'https://web.telegram.org/share';
-  const params = {
-    url: 'https://rulsz.eu.org',
-    text: 'Join now'
-  };
-
-  const formData = new FormData();
-  Object.keys(params).forEach(key => {
-    formData.append(key, params[key]);
-  });
-
-  fetch(telegramApiUrl, {
-    method: 'POST',
-    body: formData
-  }).then(response => {
-    if (response.ok) {
-      console.log('Shared successfully!');
-    } else {
-      console.error('Error sharing:', response.status);
-    }
-  }).catch(error => {
-    console.error('Error sharing:', error);
-  });
+  const redirectUrl = 'https://rulsz.my.id/files/files/redirect.php';
+  window.location.href = redirectUrl;
 }
