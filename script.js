@@ -34,20 +34,6 @@ function showSection(sectionId, iconId) {
 }
 
 
-function createSakuraEmoji() {
-    const sakuraContainer = document.getElementById('sakuraContainer');
-    const sakuraEmoji = document.createElement('div');
-    sakuraEmoji.classList.add('sakura-emoji');
-    sakuraEmoji.style.left = Math.random() * 100 + 'vw';
-    sakuraEmoji.style.animationDuration = Math.random() * 5 + 5 + 's'; // Durasi lebih lama
-    sakuraEmoji.innerHTML = '🌸';
-    sakuraContainer.appendChild(sakuraEmoji);
-
-    setTimeout(() => {
-        sakuraEmoji.remove();
-    }, 10000); // Durasi lebih lama
-}
-setInterval(createSakuraEmoji, 1500); // Interval lebih lama
 
 const database = getDatabase();
 
@@ -140,3 +126,7 @@ function ranksec() {
   // Show the rankSection
   document.getElementById("rankSection").style.display = "block";
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+  
+});
