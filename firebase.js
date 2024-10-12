@@ -179,9 +179,9 @@ get(ref(database, 'users/')).then((snapshot) => {
         medal = `#${rank}`;
     }
     const holderHTML = `
-      <div class="flex item center justify-between bg-[#1c1c1e] p-4 rounded-2xl" style="margin-bottom: 15px;">
+      <div class="flex item center justify-between bg-[#1c1c1e] p-4" style="margin-bottom: 15px; border-radius: 20px;">
         <div class="flex items-center">
-          <img alt="https://rulsz.my.id/files/files/folder/logo.png" class="w-12 h-12 rounded-full mr-4" height="50" src="https://rulsz.my.id/files/files/folder/logo.png" width="50"/>
+          <img class="w-12 h-12 rounded-full mr-4" height="50" src="https://rulsz.my.id/files/files/sakura_icon.png" width="50"/>
           <div>
             <div class="text-lg font-bold">${user.username}</div>
             <div class="text-gray-400">${user.coin.toLocaleString()} 🌸</div>
@@ -222,6 +222,28 @@ get(ref(database, 'tasklist/')).then((snapshot) => {
               </div>
     `;
     document.getElementById('taskList').innerHTML += taskHTML;
+  });
+});
+
+get(ref(database, 'tasklist/')).then((snapshot) => {
+  const tasklist = snapshot.val();
+  Object.keys(tasklist).forEach((key) => {
+    console.log(`Key: ${key}`); // Log each key
+    const task = tasklist[key];
+    const taskHTML = `
+      <div class="task" style="background-color: #282828;">
+                <div class="flex items-center space-x-2 task-info">
+                  <i class="${task.icon} text-gray-400"></i>
+                  <div class="task-details">
+                    <div class="task-title">${task.name}</div>
+                    <div class="task-reward">Reward: <span class="text-white">${task.reward}</span> 🌸 <span
+                          class="text-white">0.1</span> <i class="fas fa-info-circle"></i></div>
+                  </div>
+                </div>
+                <button class="bg-[#282828] text-white px-4 py-1 rounded-lg task-button" data-task-id="${key}" data-reward="${task.reward}" onclick="goToTask(this, ${task.reward}, '${key}', '${task.link}')">Go</button>
+              </div>
+    `;
+    document.getElementById('specialList').innerHTML += taskHTML;
   });
 });
 
