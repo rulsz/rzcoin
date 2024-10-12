@@ -3,6 +3,9 @@
 <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="theme-color" content="#000000">
     <title>RZ COIN</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
@@ -77,107 +80,10 @@
         </div>
         <!-- Earn Section -->
         <div id="earnSection" class="w-full p-4" style="display: none; margin-bottom: 60px;">
-            <!-- Task 1 -->
-            <div class="task">
-                <div class="flex items-center space-x-2 task-info">
-                  <i class="fas fa-times text-gray-400"></i>
-                  <div class="task-details">
-                    <div class="task-title">Follow RZ COIN Twitter</div>
-                    <div class="task-reward">Reward: <span class="text-white">+300</span> 🌸 <span
-                          class="text-white">0.1</span> <i class="fas fa-info-circle"></i></div>
-                  </div>
-                </div>
-                <button class="bg-[#282828] text-white px-4 py-1 rounded-lg" onclick="goToTask(this, 300, 'rztwitter')">Go</button>
-              </div>
-              <!-- Task 2 -->
-              <div class="task">
-                  <div class="flex items-center space-x-2 task-info">
-                      <i class="fas fa-paper-plane text-gray-400"></i>
-                      <div class="task-details">
-                          <div class="task-title">Story time with $RZ!</div>
-                          <div class="task-reward">Reward: <span class="text-white">+2,000</span> 🌸 <span
-                                  class="text-white">0.1</span> <i class="fas fa-info-circle"></i></div>
-                      </div>
-                  </div>
-                  <button class="bg-[#282828] text-white px-4 py-1 rounded-lg" onclick="goToTask(this, 2000, 'rzstory')">Go</button>
-              </div>
-              <!-- Task 3 -->
-              <div class="task">
-                  <div class="flex items-center space-x-2 task-info">
-                      <i class="fas fa-times text-gray-400"></i>
-                      <div class="task-details">
-                          <div class="task-title">Check Bitget's Article about RZ COIN</div>
-                          <div class="task-reward">Reward: <span class="text-white">+300</span> 🌸</div>
-                      </div>
-                  </div>
-                  <button class="bg-[#282828] text-white px-4 py-1 rounded-lg" onclick="goToTask(this, 300, 'rzbitget')">Go</button>
-              </div>
-              <!-- Task 4 -->
-              <div class="task">
-                  <div class="flex items-center space-x-2 task-info">
-                      <i class="fab fa-tiktok text-gray-400"></i>
-                      <div class="task-details">
-                          <div class="task-title">Like and repost TikTok video</div>
-                          <div class="task-reward">Reward: <span class="text-white">+300</span> 🌸</div>
-                      </div>
-                  </div>
-                  <button class="bg-[#282828] text-white px-4 py-1 rounded-lg" onclick="goToTask(this, 300, 'rzretiktok')">Go</button>
-              </div>
-              <!-- Task 5 -->
-              <div class="task">
-                  <div class="flex items-center space-x-2 task-info">
-                      <i class="fab fa-tiktok text-gray-400"></i>
-                      <div class="task-details">
-                          <div class="task-title">Follow RZ COIN TikTok</div>
-                          <div class="task-reward">Reward: <span class="text-white">+300</span> 🌸</div>
-                      </div>
-                  </div>
-                  <button class="bg-[#282828] text-white px-4 py-1 rounded-lg" onclick="goToTask(this, 300, 'rztiktok')">Go</button>
-              </div>
-              <!-- Task 6 -->
-              <div class="task">
-                  <div class="flex items-center space-x-2 task-info">
-                      <i class="fas fa-times text-gray-400"></i>
-                      <div class="task-details">
-                          <div class="task-title">RZ COIN X Bitget: Giveaway $1000 in $TON</div>
-                          <div class="task-reward">Reward: <span class="text-white">+300</span> 🌸</div>
-                      </div>
-                  </div>
-                  <button class="bg-[#282828] text-white px-4 py-1 rounded-lg" onclick="goToTask(this, 300, 'rzbit1000')">Go</button>
-              </div>
-              <!-- Task 7 -->
-              <div class="task">
-                  <div class="flex items-center space-x-2 task-info">
-                      <i class="fas fa-times text-gray-400"></i>
-                      <div class="task-details">
-                          <div class="task-title">RZ COIN X OKX Wallet: OKX Connect Integration</div>
-                          <div class="task-reward">Reward: <span class="text-white">+300</span> 🌸</div>
-                      </div>
-                  </div>
-                  <button class="bg-[#282828] text-white px-4 py-1 rounded-lg" onclick="goToTask(this, 300, 'okx')">Go</button>
-              </div>
-              <!-- Task 8 -->
-              <div class="task">
-                  <div class="flex items-center space-x-2 task-info">
-                      <i class="fas fa-gamepad text-gray-400"></i>
-                      <div class="task-details">
-                          <div class="task-title">Play Lucky Number</div>
-                          <div class="task-reward">Reward: <span class="text-white">+20,000</span> 🌸</div>
-                      </div>
-                  </div>
-                  <button class="bg-[#282828] text-white px-4 py-1 rounded-lg" onclick="goToTask(this, 20000, 'rzlucky')">Go</button>
-              </div>
-              <!-- Task 9 -->
-              <div class="task">
-                  <div class="flex items-center space-x-2 task-info">
-                      <i class="fas fa-gamepad text-gray-400"></i>
-                      <div class="task-details">
-                          <div class="task-title">Play Lucky Scratch</div>
-                          <div class="task-reward">Reward: <span class="text-white">+20,000</span> 🌸</div>
-                      </div>
-                  </div>
-                  <button class="bg-[#282828] text-white px-4 py-1 rounded-lg" onclick="goToTask(this, 20000, 'rzluckysc')">Go</button>
-              </div>
+            <div class="text-lg font-bold" style="margin-bottom: 15px;">Daily</div>
+            <div id="taskList" class="task-List">
+            </div>
+            
           </div>
     
 <!-- Frens Section -->
