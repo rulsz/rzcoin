@@ -8,6 +8,7 @@
     <meta name="theme-color" content="#000000">
     <title>RZ COIN</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -174,7 +175,20 @@
             <div class="text-gray-400">Wallet</div>
         </a>
     </div>
-    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            if (window.Telegram && window.Telegram.WebApp) {
+                // Set tema ke dark mode
+                Telegram.WebApp.setHeaderColor('secondary_bg_color');
+                
+                // Atur warna status bar menjadi hitam
+                Telegram.WebApp.setBackgroundColor('#000000');
+                
+                // Expand WebApp ke fullscreen
+                Telegram.WebApp.expand();
+            }
+        });
+    </script>
 </body>
 
 </html>
