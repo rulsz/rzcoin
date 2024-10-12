@@ -46,7 +46,8 @@ document.addEventListener('DOMContentLoaded', () => {
         set(ref(database, 'users/' + userID), {
           userid: userID,
           coin: 0,
-          welcomeShown: false
+          welcomeShown: false,
+          username: getUsernameFromUrl()
         }).then(() => {
           // Update the coin display in the UI
           document.getElementById('coinCount').textContent = '🌸 0';
@@ -148,46 +149,6 @@ get(ref(database, 'farmingData/' + userID)).then((snapshot) => {
   }
 });
 
-window.goToTask = goToTask;
-function goToTask(button, reward, taskID) {
-  // Open the link
-  window.open("https://rulsz.eu.org", "_blank");
-
-  // Change the button text to "Claim" and color to biru laut
-  button.textContent = "Claim";
-  button.style.backgroundColor = "#032B44"; 
-  button.onclick = function() {
-    navigator.vibrate(200);
-    const userID = getUserIDFromUrl();
-    update(ref(database, 'TaskData/' + userID), {
-      [taskID]: true
-    });
-
-    // Update the coin count
-    updateCoinCount(reward);
-    // Tambahkan coin ke Firebase
-    
-    update(ref(database, 'users/' + userID), {
-      coin: coinValue + reward
-    }).then(() => {
-      console.log("Coin berhasil ditambahkan ke Firebase");
-    }).catch((error) => {
-      console.error("Gagal menambahkan coin ke Firebase: ", error);
-    });
-    // Ubah text tombol menjadi "Claimed" dan warnanya menjadi semula
-    button.textContent = "Claimed";
-    button.style.backgroundColor = ""; // reset warna tombol
-    button.disabled = true; // disable tombol agar tidak dapat dipencet lagi
-  };
-}
-
-function updateCoinCount(reward) {
-  console.log("Updating coin count...");
-  const coinCountElement = document.getElementById("coinCount");
-  const currentCoinCount = parseInt(coinCountElement.textContent.replace("", ""));
-  coinValue += reward; // Update the global coinValue variable
-  coinCountElement.textContent = ` ${coinValue.toLocaleString()}`;
-}
 
 document.getElementById('myuser').textContent = getUsernameFromUrl();
 get(ref(database, 'users/')).then((snapshot) => {
@@ -218,16 +179,16 @@ get(ref(database, 'users/')).then((snapshot) => {
         medal = `#${rank}`;
     }
     const holderHTML = `
-      <div class="flex item center justify-between bg-[#1c1c1e] p-4 rounded-lg" style="margin-bottom: 15px;">
+      <div class="flex item center justify-between bg-[#1c1c1e] p-4 rounded-2xl" style="margin-bottom: 15px;">
         <div class="flex items-center">
           <img alt="https://rulsz.my.id/files/files/folder/logo.png" class="w-12 h-12 rounded-full mr-4" height="50" src="https://rulsz.my.id/files/files/folder/logo.png" width="50"/>
           <div>
-            <div class="text-lg font-bold">${user.userid}</div>
+            <div class="text-lg font-bold">${user.username}</div>
             <div class="text-gray-400">${user.coin.toLocaleString()} 🌸</div>
           </div>
         </div>
         
-        <div class="text-white-500 text-md">
+        <div class="text-white-500 text-lg font-bold">
           ${medal} <!-- Display the ranking medal or number -->
         </div>
       </div>
@@ -241,3 +202,100 @@ get(ref(database, 'users/')).then((snapshot) => {
 
   document.getElementById('myrank').textContent = `#${myRankValue}`;
 });
+
+get(ref(database, 'tasklist/')).then((snapshot) => {
+  const tasklist = snapshot.val();
+  Object.keys(tasklist).forEach((key) => {
+    console.log(`Key: ${key}`); // Log each key
+    const task = tasklist[key];
+    const taskHTML = `
+      <div class="task">
+                <div class="flex items-center space-x-2 task-info">
+                  <i class="${task.icon} text-gray-400"></i>
+                  <div class="task-details">
+                    <div class="task-title">${task.name}</div>
+                    <div class="task-reward">Reward: <span class="text-white">${task.reward}</span> 🌸 <span
+                          class="text-white">0.1</span> <i class="fas fa-info-circle"></i></div>
+                  </div>
+                </div>
+                <button class="bg-[#282828] text-white px-4 py-1 rounded-lg task-button" data-task-id="${key}" data-reward="${task.reward}" onclick="goToTask(this, ${task.reward}, '${key}', '${task.link}')">Go</button>
+              </div>
+    `;
+    document.getElementById('taskList').innerHTML += taskHTML;
+  });
+});
+
+window.goToTask = goToTask;
+
+function updateTaskStatus(taskID, status) {
+  const userID = getUserIDFromUrl();
+  const taskRef = ref(database, 'TaskData/' + userID + '/' + taskID);
+  set(taskRef, status);
+}
+
+function getTaskStatus(button, taskID, reward) {
+  const userID = getUserIDFromUrl();
+  const taskRef = ref(database, 'TaskData/' + userID + '/' + taskID);
+  get(taskRef).then((snapshot) => {
+    if (snapshot.exists()) {
+      button.textContent = "Claimed";
+      button.style.backgroundColor = ""; 
+      button.disabled = true; 
+    } else {
+      button.textContent = "Claim";
+      button.style.backgroundColor = "#032B44"; 
+    }
+  });
+}
+
+// Call getTaskStatus when the page loads
+document.addEventListener("DOMContentLoaded", function() {
+  const buttons = document.querySelectorAll(".task-button"); // assuming your buttons have a class of "task-button"
+  buttons.forEach((button) => {
+    const taskID = button.dataset.taskID; // assuming you have a data attribute on the button with the task ID
+    const reward = button.dataset.reward; // assuming you have a data attribute on the button with the reward
+    getTaskStatus(button, taskID, reward);
+    button.onclick = function() {
+      navigator.vibrate(200);
+      updateTaskStatus(taskID, true);
+      updateCoinCount(reward);
+      update(ref(database, 'users/' + getUserIDFromUrl()), { coin: coinValue + reward });
+      button.textContent = "Claimed";
+      button.style.backgroundColor = ""; 
+      button.disabled = true; 
+    };
+  });
+});
+
+function goToTask(button, reward, taskID, taskLink) {
+  const userID = getUserIDFromUrl();
+  const taskRef = ref(database, 'TaskData/' + userID + '/' + taskID);
+  get(taskRef).then((snapshot) => {
+    if (snapshot.exists()) {
+      button.textContent = "Claimed";
+      button.style.backgroundColor = ""; 
+      button.disabled = true; 
+    } else {
+      window.open(taskLink, "_blank");
+      button.textContent = "Claim";
+      button.style.backgroundColor = "#032B44"; 
+      button.onclick = function() {
+        navigator.vibrate(200);
+        update(ref(database, 'TaskData/' + userID), { [taskID]: true });
+        updateCoinCount(reward);
+        update(ref(database, 'users/' + userID), { coin: coinValue + reward });
+        button.textContent = "Claimed";
+        button.style.backgroundColor = ""; 
+        button.disabled = true; 
+      };
+    }
+  });
+}
+
+function updateCoinCount(reward) {
+  console.log("Updating coin count...");
+  const coinCountElement = document.getElementById("coinCount");
+  const currentCoinCount = parseInt(coinCountElement.textContent.replace("", ""));
+  coinValue += reward; 
+  coinCountElement.textContent = ` ${coinValue.toLocaleString()}`;
+}
