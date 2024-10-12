@@ -4,6 +4,41 @@ body {
   background-color: #000;
   color: #fff;
 }
+.splash-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.splash-content {
+  text-align: center;
+}
+
+.splash-logo {
+  width: 120px;
+  height: auto;
+  margin-bottom: 20px;
+  animation: blink 2s linear infinite;
+}
+
+.splash-loading {
+  margin-top: 20px;
+  font-size: 18px;
+  color: #666;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  40%, 60% { opacity: 0.5; }
+}
+
 .Section {
   display: flex;
   flex-direction: column;
@@ -53,16 +88,17 @@ body {
 .rank-icon::before {
   content: "\f091"; /* icon trofi */
 }
-.game-section {
+
+.menu-section {
   background-color: #1c1c1e; /* Slightly lighter gray shade */
   border-radius: 1.2rem;
   padding: 1rem;
   width: 100%;
   display: flex;
-  justify-content: center;
-  align-items: center;
   margin-bottom: 1rem;
+  flex-direction: column;
 }
+
 .farming-button {
   background-color: #ffffff;
   color: #000000;
@@ -125,7 +161,7 @@ body {
   background-color: #1c1c1e; 
   padding: 1rem; 
   margin-bottom: 15px; 
-  border-radius: 1rem; 
+  border-radius: 20px; 
   display: flex; 
   justify-content: space-between; 
   align-items: center;
@@ -170,21 +206,6 @@ body {
   background-color: #00BFFF; /* Light blue color */
 }
 
-.sakura-emoji {
-  position: absolute;
-  font-size: 15px;
-  animation: fall linear infinite;
-}
-@keyframes fall {
-  0% {
-      transform: translateY(-100px) rotate(0deg);
-      opacity: 1;
-  }
-  100% {
-      transform: translateY(100vh) rotate(360deg);
-      opacity: 0;
-  }
-}
 .dialog {
   position: fixed;
   bottom: 0;
