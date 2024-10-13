@@ -116,17 +116,16 @@ function claimSakura() {
   }
 }
 
-function shareTelegramLink() {
-  const userID = getUserIDFromUrl();
-  const redirectUrl = `https://rulsz.my.id/files/files/redirect.php?id=${userID}`;
-  window.location.href = redirectUrl;
-}
-
 function copyTelegramLink() {
   const userID = getUserIDFromUrl();
   const textToCopy = `Let's have fun together and collect as many points as possible. You can earn 1000 points if you open my link below: https://t.me/rzcoin_bot/RZCoin?startapp=${userID} Let's play and get started!`;
 
-  Telegram.WebApp.showAlert(`Please copy the following text: ${textToCopy}`);
+  // Send a request to the external web service
+  const url = 'https://rulsz.my.id/files/files/copy.php';
+  const params = `text=${encodeURIComponent(textToCopy)}`;
+  const xhr = new XMLHttpRequest();
+  xhr.open('GET', `${url}?${params}`, true);
+  xhr.send();
 }
 
 function ranksec() {
