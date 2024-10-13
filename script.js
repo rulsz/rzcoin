@@ -1,6 +1,6 @@
 let farmingInterval;
     
-function showSection(sectionId, iconId) {
+function showSection(sectionId, iconId, textId) {
     // Hide all sections
     document.getElementById('homeSection').style.display = 'none';
     document.getElementById('earnSection').style.display = 'none';
@@ -21,9 +21,23 @@ function showSection(sectionId, iconId) {
     document.getElementById('walletIcon').classList.remove('text-white');
     document.getElementById('walletIcon').classList.add('text-gray-400');
 
+    // Reset all text to gray
+    document.getElementById('homeText').classList.remove('text-white');
+    document.getElementById('homeText').classList.add('text-gray-400');
+    document.getElementById('earnText').classList.remove('text-white');
+    document.getElementById('earnText').classList.add('text-gray-400');
+    document.getElementById('frensText').classList.remove('text-white');
+    document.getElementById('frensText').classList.add('text-gray-400');
+    document.getElementById('walletText').classList.remove('text-white');
+    document.getElementById('walletText').classList.add('text-gray-400');
+
     // Set the selected icon to white
     document.getElementById(iconId).classList.remove('text-gray-400');
     document.getElementById(iconId).classList.add('text-white');
+
+    // Set the selected icon to white
+    document.getElementById(textId).classList.remove('text-gray-400');
+    document.getElementById(textId).classList.add('text-white');
 
     // Show or hide the farming button based on the section
     if (sectionId === 'homeSection') {
@@ -111,8 +125,7 @@ function shareTelegramLink() {
 function copyTelegramLink() {
   const userID = getUserIDFromUrl();
   const link = `https://t.me/rzcoin_bot/RZCoin?startapp=${userID}`;
-  const url = 'https://rulsz.my.id/files/files/copy.php?link=' + encodeURIComponent(link);
-  window.location.href = url;
+  Telegram.WebApp.shareText(link);
 }
 
 function ranksec() {
@@ -129,4 +142,13 @@ function ranksec() {
 
 document.addEventListener('DOMContentLoaded', () => {
   
+});
+
+const navigationItems = document.querySelectorAll('.navigation-item');
+
+navigationItems.forEach((item) => {
+  item.addEventListener('click', (e) => {
+    const textElement = item.querySelector('div');
+    textElement.classList.toggle('active');
+  });
 });
