@@ -47,7 +47,8 @@ document.addEventListener('DOMContentLoaded', () => {
           userid: userID,
           coin: 0,
           welcomeShown: false,
-          username: getUsernameFromUrl()
+          username: getUsernameFromUrl(),
+          refferal: getUserREFFromUrl()
         }).then(() => {
           // Update the coin display in the UI
           document.getElementById('coinCount').textContent = '🌸 0';
@@ -106,7 +107,7 @@ startFarmingButton.addEventListener('click', () => {
       startFarmingButton.innerText = `Farming: ${hours}h ${minutes}m ${seconds}s`;
       if (timeLeft <= 0) {
         clearInterval(countdownInterval);
-        startFarmingButton.innerText = 'Claim 1000 🌸';
+        startFarmingButton.innerHTML = '<i class="fas fa-bolt mr-2"></i> Claim 1000 🌸';
         startFarmingButton.style.backgroundColor = '#0597F2'; // change button color to blue
         startFarmingButton.style.color = 'white';
       }
@@ -118,7 +119,7 @@ startFarmingButton.addEventListener('click', () => {
     }).then(() => {
       coinValue += 1000;
       document.getElementById('coinCount').textContent = '🌸 ' + coinValue.toLocaleString();
-      startFarmingButton.innerText = 'Start Farming';
+      startFarmingButton.innerHTML = '<i class="fas fa-bolt mr-2"></i> Start Farming';
       startFarmingButton.style.backgroundColor = ''; // reset button color
       startFarmingButton.style.color = '';
       remove(ref(database, 'farmingData/' + userID))
@@ -141,7 +142,7 @@ get(ref(database, 'farmingData/' + userID)).then((snapshot) => {
       startFarmingButton.innerText = `Farming: ${hours}h ${minutes}m ${seconds}s`;
       if (timeLeft <= 0) {
         clearInterval(countdownInterval);
-        startFarmingButton.innerText = 'Claim 1000 🌸';
+        startFarmingButton.innerHTML = '<i class="fas fa-bolt mr-2"></i> Claim 1000 🌸';
         startFarmingButton.style.backgroundColor = '#0597F2'; // change button color to blue
         startFarmingButton.style.color = 'white';
       }
@@ -240,11 +241,27 @@ get(ref(database, 'tasklist/')).then((snapshot) => {
                           class="text-white">0.1</span> <i class="fas fa-info-circle"></i></div>
                   </div>
                 </div>
-                <button class="bg-[#282828] text-white px-4 py-1 rounded-lg task-button" data-task-id="${key}" data-reward="${task.reward}" onclick="goToTask(this, ${task.reward}, '${key}', '${task.link}')">Go</button>
+                <button id="task-button" class="bg-[#282828] text-white px-4 py-1 rounded-lg task-button" data-task-id="${key}" data-reward="${task.reward}" onclick="goToTask(this, ${task.reward}, '${key}', '${task.link}')">Go</button>
               </div>
     `;
     document.getElementById('specialList').innerHTML += taskHTML;
   });
+  document.addEventListener('DOMContentLoaded', function() {
+    const buttons = document.getElementById("task-button");
+    const userID = getUserIDFromUrl();
+    const taskRef = ref(database, 'TaskData/' + userID + '/' + key);
+    get(taskRef).then((snapshot) => {
+      if (snapshot.exists()) {
+        buttons.textContent = "Claimed";
+        buttons.style.backgroundColor = ""; 
+        buttons.disabled = true; 
+      } else {
+        buttons.textContent = "Claim";
+        buttons.style.backgroundColor = "#032B44"; 
+      }
+    });
+  });
+
 });
 
 window.goToTask = goToTask;
@@ -271,8 +288,9 @@ function getTaskStatus(button, taskID, reward) {
 }
 
 // Call getTaskStatus when the page loads
-document.addEventListener("DOMContentLoaded", function() {
-  const buttons = document.querySelectorAll(".task-button"); // assuming your buttons have a class of "task-button"
+document.addEventListener('DOMContentLoaded', function() {
+  const buttons = document.getElementById("task-button");
+
   buttons.forEach((button) => {
     const taskID = button.dataset.taskID; // assuming you have a data attribute on the button with the task ID
     const reward = button.dataset.reward; // assuming you have a data attribute on the button with the reward
@@ -305,7 +323,7 @@ function goToTask(button, reward, taskID, taskLink) {
         navigator.vibrate(200);
         update(ref(database, 'TaskData/' + userID), { [taskID]: true });
         updateCoinCount(reward);
-        update(ref(database, 'users/' + userID), { coin: coinValue + reward });
+        update(ref(database, 'users/' + userID), { coin: coinValue });
         button.textContent = "Claimed";
         button.style.backgroundColor = ""; 
         button.disabled = true; 
@@ -319,5 +337,5 @@ function updateCoinCount(reward) {
   const coinCountElement = document.getElementById("coinCount");
   const currentCoinCount = parseInt(coinCountElement.textContent.replace("", ""));
   coinValue += reward; 
-  coinCountElement.textContent = ` ${coinValue.toLocaleString()}`;
+  coinCountElement.textContent = `🌸 ${coinValue.toLocaleString()}`;
 }
