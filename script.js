@@ -143,12 +143,3 @@ function ranksec() {
 document.addEventListener('DOMContentLoaded', () => {
   
 });
-
-const navigationItems = document.querySelectorAll('.navigation-item');
-
-navigationItems.forEach((item) => {
-  item.addEventListener('click', (e) => {
-    const textElement = item.querySelector('div');
-    textElement.classList.toggle('active');
-  });
-});
