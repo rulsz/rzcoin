@@ -144,6 +144,7 @@ body {
 .navigation-item:hover {
   color: #4299e1;
 }
+
 .profile-image {
   background-color: #4299e1;
   border-radius: 9999px;
@@ -249,9 +250,7 @@ body {
 }
 
 .frenss {
-  padding: 1rem; 
-  margin-bottom: 150px;
-  border-radius: 1rem; 
+   
   align-items: center;
 
 }
