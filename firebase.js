@@ -339,3 +339,23 @@ function updateCoinCount(reward) {
   coinValue += reward; 
   coinCountElement.textContent = `🌸 ${coinValue.toLocaleString()}`;
 }
+let reffcount = 0;
+get(ref(database, 'users/')).then((snapshot) => {
+  const refflist = snapshot.val();
+  Object.keys(refflist).forEach((key, index) => {
+    const reff = refflist[key];
+    if (reff.refferal === userID) {
+      reffcount++;
+      const reffHTML = `
+        <tr>
+          <td class="py-2">${reffcount}</td>
+          <td class="py-2">${reff.username}</td>
+          <td class="py-2">+1000</td>
+        </tr>
+      `;
+      document.getElementById('reffList').innerHTML += reffHTML;
+    }
+  });
+  document.getElementById('totalReff').innerHTML = `x ${reffcount}`;
+  document.getElementById('totalrew').innerHTML = `🌸 ${reffcount * 1000}`;
+});
