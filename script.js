@@ -125,13 +125,10 @@ function shareTelegramLink() {
 function copyTelegramLink() {
   const userID = getUserIDFromUrl();
   const textToCopy = `Let's have fun together and collect as many points as possible. You can earn 1000 points if you open my link below: https://t.me/rzcoin_bot/RZCoin?startapp=${userID} Let's play and get started!`;
+  const refCode = "YOUR_REFERRAL_CODE";
 
-  Telegram.WebApp.showAlert({
-    text: 'Copy the text below to share with your friends:',
-    confirmText: 'Copy',
-    cancelText: 'Cancel',
-    content: textToCopy,
-  });
+  copyToClipboard(refCode);
+ Telegram.WebApp.showAlert("Referral code copied to clipboard!");
 }
 
 function ranksec() {
