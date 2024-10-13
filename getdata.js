@@ -20,6 +20,15 @@ function getUserIDFromUrl() {
     return null;
 }
 
+function getUserREFFromUrl() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const tgWebAppStartParam = urlParams.get('tgWebAppStartParam');
+    if (tgWebAppStartParam) {
+        return tgWebAppStartParam;
+    }
+    return false;
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     const username = getUsernameFromUrl();
     if (username) {
