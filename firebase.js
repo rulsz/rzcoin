@@ -42,13 +42,15 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
       } else {
+        const referral = getUserREFFromUrl();
+const referralNumber = referral !== false ? parseInt(referral) : referral;
         // User ID does not exist, set the initial value
         set(ref(database, 'users/' + userID), {
           userid: userID,
           coin: 0,
           welcomeShown: false,
           username: getUsernameFromUrl(),
-          refferal: getUserREFFromUrl()
+          refferal: referralNumber
         }).then(() => {
           // Update the coin display in the UI
           document.getElementById('coinCount').textContent = '🌸 0';
@@ -91,7 +93,7 @@ let countdownInterval;
 let startTime;
 
 startFarmingButton.addEventListener('click', () => {
-  if (startFarmingButton.innerText === 'Start farming') {
+  if (startFarmingButton.innerText === 'Start Farming') {
     startTime = new Date().getTime() + 2 * 60 * 60 * 1000; // 2 jam dari sekarang
     const userID = getUserIDFromUrl();
     set(ref(database, 'farmingData/' + userID), {
