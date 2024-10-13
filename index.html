@@ -107,23 +107,23 @@
     <div id="frens-section" class="menu-section">
 
         <div class="frenss">
-            <h1 class="text-center text-xl font-bold mb-2">Invite friends <span>👨‍👩‍👧‍👦</span> and get rewards</h1>
-            <p class="text-center text-gray-400 mb-4 text-sm">Earn up to 50,000 points from your friends!</p>    
+            <h1 class="text-center text-xl font-bold mb-2">Invite friends <span></span> and get rewards</h1>
+            <p class="text-center text-gray-400 mb-4 text-sm">Earn up to 50,000 🌸 from your friends!</p>    
         
             <div class="flex justify-between mb-4">
                 <div class="bg-[#282828] p-4 rounded-2xl text-center w-1/2 mr-2">
                     <p class="text-gray-400 text-sm">Friends invited</p>
-                    <p class="text-xl font-bold"><span>👨‍👩‍👧‍👦</span> x 0</p>
+                    <p id="totalReff" class="text-xl font-bold"><span></span> x 0</p>
                 </div>
                 <div class="bg-[#282828] p-4 rounded-2xl text-center w-1/2 ml-2">
                     <p class="text-gray-400 text-sm">Coins earned</p>
-                    <p class="text-xl font-bold"><span>🌸 0</p>
+                    <p id="totalrew" class="text-xl font-bold"><span>🌸 0</p>
                 </div>          
       </div>
         
       <ul class="text-gray-400 mb-4 text-sm">
-        <li>You could earn <span class="text-white font-bold">10%</span> of all points earned by players you have invited, capped at <span class="text-white font-bold">50,000</span> points.</li>
-        <li>Invited friends will receive a gift of <span class="text-white font-bold">1000</span> points.</li>
+        <li>You could earn <span class="text-white font-bold">10%</span> of all points earned by players you have invited, capped at <span class="text-white font-bold">50,000</span> 🌸.</li>
+        <li>Invited friends will receive a gift of <span class="text-white font-bold">1000</span> 🌸.</li>
     </ul>
     
     <table class="w-full text-left mb-4 text-sm">
@@ -131,21 +131,11 @@
             <tr>
                 <th class="w-1/12">No.</th>
                 <th class="w-11/12">Friend's name</th>
+                <th class="w-11/12">Rewards</th>
             </tr>
         </thead>
-        <tbody>
-            <tr>
-                <td class="py-2">1</td>
-                <td class="py-2">Rafki</td>
-            </tr>
-            <tr>
-                <td class="py-2">2</td>
-                <td class="py-2">Twenty24hfour <span>🍅🌱🐦💠🦐🐸</span></td>
-            </tr>
-            <tr>
-                <td class="py-2">3</td>
-                <td class="py-2">markonah</td>
-            </tr>
+        <tbody id="reffList">
+            <!-- Data akan diisi di sini -->
         </tbody>
     </table>
 </div>
@@ -177,22 +167,22 @@
     
     <!-- Floating Navigation Bar -->
     <div class="navigation-bar">
-        <a onclick="showSection('homeSection', 'homeIcon')" class="navigation-item">
+        <a onclick="showSection('homeSection', 'homeIcon', 'homeText')" class="navigation-item">
             <i id="homeIcon" class="fas fa-home text-white"></i>
-            <div class="text-white">Home</div>
-        </a>
-        <a onclick="showSection('earnSection', 'earnIcon')" class="navigation-item">
+            <div class="text-white" id="homeText">Home</div>
+          </a>
+          <a onclick="showSection('earnSection', 'earnIcon', 'earnText')" class="navigation-item">
             <i id="earnIcon" class="fas fa-coins text-gray-400"></i>
-            <div class="text-gray-400">Earn</div>
-        </a>
-        <a onclick="showSection('frensSection', 'frensIcon')" class="navigation-item">
+            <div class="text-gray-400" id="earnText">Earn</div>
+          </a>
+          <a onclick="showSection('frensSection', 'frensIcon', 'frensText')" class="navigation-item">
             <i id="frensIcon" class="fas fa-user-group text-gray-400" style="font-size: 1.2rem;"></i>
-            <div class="text-gray-400">Frens</div>
-        </a>
-        <a onclick="showSection('walletSection', 'walletIcon')" class="navigation-item">
+            <div class="text-gray-400" id="frensText">Frens</div>
+          </a>
+          <a onclick="showSection('walletSection', 'walletIcon', 'walletText')" class="navigation-item">
             <i id="walletIcon" class="fas fa-wallet text-gray-400"></i>
-            <div class="text-gray-400">Wallet</div>
-        </a>
+            <div class="text-gray-400" id="walletText">Wallet</div>
+          </a>
     </div>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
