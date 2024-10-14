@@ -119,7 +119,7 @@ function claimSakura() {
 function shareTelegramLink() {
   const userID = getUserIDFromUrl();
   const url = `https://rulsz.my.id/files/files/redirect.php?id=${userID}`;
-  window.open(url, '_blank');
+  window.open(url);
 }
 
 function copyTelegramLink() {
