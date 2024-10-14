@@ -145,7 +145,3 @@ function ranksec() {
   // Show the rankSection
   document.getElementById("rankSection").style.display = "block";
 }
-
-document.addEventListener('DOMContentLoaded', () => {
-  
-});
