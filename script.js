@@ -116,6 +116,12 @@ function claimSakura() {
   }
 }
 
+function shareTelegramLink() {
+  const userID = getUserIDFromUrl();
+  const url = `https://rulsz.my.id/files/files/redirect.php?id=${userID}`;
+  window.open(url, '_blank');
+}
+
 function copyTelegramLink() {
   const userID = getUserIDFromUrl();
   const textToCopy = `Let's have fun together and collect as many points as possible. You can earn 1000 points if you open my link below: https://t.me/rzcoin_bot/RZCoin?startapp=${userID} Let's play and get started!`;
